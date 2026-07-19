@@ -260,11 +260,26 @@ tbody tr:hover { background: rgba(122, 40, 40, 0.02); }
 
 footer.site {
   border-top: 1px solid var(--rule);
-  padding: 2rem 0 3rem;
-  font-size: 0.9rem;
+  padding: 1.3rem 0 1.8rem;
+  background: var(--parchment-warm);
   color: var(--ink-soft);
-  text-align: center;
-  font-style: italic;
+  font-style: normal;
+  margin-top: 2rem;
+}
+footer.site .footer-rule {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+footer.site .footer-attr {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
 }
 footer.site a { color: var(--ink-soft); border-bottom-color: rgba(74, 70, 66, 0.3); }
 
@@ -435,7 +450,7 @@ BASE_TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=7">
+<link rel="stylesheet" href="style.css?v=8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -464,8 +479,11 @@ BASE_TEMPLATE = """<!DOCTYPE html>
 </main>
 <footer class="site">
   <div class="wrap">
-    <p><em>The Fathers' work, continued. Vivat Jesus.</em></p>
-    <p>One good deed. One witness. One hour. One token.</p>
+    <div class="footer-rule">One good deed. One witness. One hour. One token.</div>
+    <div class="footer-attr">
+      Holy Trinity Caisse · Lenexa, Kansas · Under the umbrella of PAIX<br>
+      A pre-approval proposal, offered to the Parish. Not yet blessed, endorsed, or enrolled.
+    </div>
   </div>
 </footer>
 </body>

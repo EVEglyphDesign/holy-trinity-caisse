@@ -37,4 +37,4 @@ To start a new caisse for another parish:
 
 ## Governance
 
-Under PAIX. Safety first, betterment second. The Fathers' work continued.
+Under PAIX. Safety first, betterment second.
