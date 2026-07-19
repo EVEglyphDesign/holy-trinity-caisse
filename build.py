@@ -112,34 +112,40 @@ header.site {
   letter-spacing: 0.01em;
 }
 .pre-approval {
-  background: #fdf5df;
-  border-top: 1px solid #d8c992;
+  background: #fbecad;
   border-bottom: 1px solid #d8c992;
-  color: #5a4a10;
-  padding: 0.5rem 0;
-  font-size: 0.82rem;
-  line-height: 1.4;
+  color: #4a3f10;
+  padding: 0.32rem 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
   font-family: 'Inter', -apple-system, sans-serif;
-  font-weight: 450;
-  text-align: left;
+  font-weight: 500;
+  text-align: center;
 }
-.pre-approval strong { color: #3a3008; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.7rem; font-weight: 700; }
+.pre-approval strong { color: #2f2508; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.68rem; font-weight: 700; margin-right: 0.5em; }
 .pre-approval .wrap { max-width: 820px; padding: 0 1.1rem; margin: 0 auto; }
 nav.site {
   border-bottom: 1px solid var(--rule);
   background: var(--parchment);
   font-family: 'Inter', -apple-system, sans-serif;
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+nav.site::-webkit-scrollbar { display: none; }
 nav.site .wrap {
   display: flex;
-  gap: 1.1rem;
-  padding-top: 0.55rem;
-  padding-bottom: 0.55rem;
-  flex-wrap: wrap;
+  gap: 1.2rem;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  width: max-content;
+  min-width: 100%;
 }
 nav.site a {
   color: var(--ink-soft);
@@ -153,7 +159,7 @@ nav.site a:hover, nav.site a.current {
 }
 
 main {
-  padding: 1.6rem 0 3rem;
+  padding: 1.2rem 0 3rem;
 }
 
 h1, h2, h3, h4 {
@@ -264,62 +270,84 @@ footer.site a { color: var(--ink-soft); border-bottom-color: rgba(74, 70, 66, 0.
 
 /* Home page */
 .hero {
-  padding: 1.2rem 0 1.4rem;
+  padding: 0.9rem 0 1rem;
   text-align: left;
   border-bottom: 1px solid var(--rule);
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.1rem;
 }
-.hero .rule {
-  font-family: 'Source Serif 4', Charter, Georgia, serif;
-  font-size: 1.15rem;
-  font-weight: 600;
-  font-style: italic;
+.hero-rule {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--accent);
-  margin: 0.9rem 0 0.4rem;
-  letter-spacing: 0;
+  margin: 0 0 0.5rem;
 }
 .hero h1 {
-  font-size: 2rem;
-  margin: 0 0 0.3rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-.hero .sub {
-  font-size: 1rem;
-  color: var(--ink-soft);
-  font-style: normal;
+  font-family: 'Source Serif 4', Charter, Georgia, serif;
+  font-size: 1.6rem;
   margin: 0;
-  line-height: 1.5;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  line-height: 1.15;
+  color: var(--ink);
 }
 
+.lanes-section { margin: 0 0 1.4rem; }
 .lanes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.8rem;
-  margin: 1.5rem 0 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.55rem;
+  margin: 0;
 }
 .lane {
+  display: block;
   border: 1px solid var(--rule);
-  padding: 0.8rem 0.95rem 0.95rem;
+  padding: 0.7rem 0.9rem 0.85rem;
   background: var(--parchment-warm);
   border-radius: 3px;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.12s, border-color 0.12s;
+}
+.lane:hover {
+  background: #f4ecd6;
+  border-color: var(--accent);
+}
+.lane-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
 }
 .lane .num {
   font-family: 'Source Serif 4', Charter, Georgia, serif;
-  font-size: 1.5rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--accent);
   line-height: 1;
-  margin-bottom: 0.2rem;
+  letter-spacing: 0.02em;
+}
+.lane-tag {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
 }
 .lane h3 {
   margin: 0 0 0.25rem;
-  font-size: 1rem;
+  font-size: 0.98rem;
   color: var(--ink);
-  font-weight: 600;
+  font-weight: 700;
+  font-family: 'Source Serif 4', Charter, Georgia, serif;
+  letter-spacing: -0.005em;
 }
 .lane p {
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   margin: 0;
   color: var(--ink);
   line-height: 1.45;
@@ -367,23 +395,33 @@ footer.site a { color: var(--ink-soft); border-bottom-color: rgba(74, 70, 66, 0.
 
 @media (max-width: 640px) {
   html { font-size: 15.5px; }
-  .wrap { padding: 0 0.9rem; }
-  .hero { padding: 1rem 0 1.1rem; }
-  .hero h1 { font-size: 1.65rem; }
-  h1 { font-size: 1.55rem; }
-  h2 { font-size: 1.2rem; }
-  h3 { font-size: 1.02rem; }
-  main { padding: 1.2rem 0 2.4rem; }
+  .wrap { padding: 0 0.95rem; }
+  header.site { padding: 0.55rem 0 0.5rem; }
+  .hero { padding: 0.7rem 0 0.75rem; margin-bottom: 0.9rem; }
+  .hero-rule { font-size: 0.65rem; }
+  .hero h1 { font-size: 1.35rem; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.15rem; }
+  h3 { font-size: 1rem; }
+  main { padding: 0.9rem 0 2rem; }
   table { font-size: 0.82rem; }
   th, td { padding: 0.35em 0.45em; }
-  .brand { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
-  .brand-title { font-size: 1rem; }
-  .brand-tag { font-size: 0.72rem; }
+  .brand { flex-direction: row; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+  .brand-title { font-size: 0.95rem; }
+  .brand-tag { font-size: 0.68rem; }
   nav.site { font-size: 0.72rem; }
-  nav.site .wrap { gap: 0.75rem 1rem; }
-  .pre-approval { font-size: 0.76rem; }
-  .pre-approval strong { font-size: 0.65rem; }
-  .lanes { grid-template-columns: 1fr; gap: 0.7rem; margin: 1.2rem 0 1.6rem; }
+  nav.site .wrap { gap: 1rem; padding-left: 0.95rem; padding-right: 0.95rem; }
+  .pre-approval { font-size: 0.7rem; padding: 0.28rem 0; }
+  .pre-approval strong { font-size: 0.62rem; }
+  .lanes { grid-template-columns: 1fr 1fr; gap: 0.45rem; }
+  .lane { padding: 0.55rem 0.7rem 0.6rem; }
+  .lane .num { font-size: 1rem; }
+  .lane-tag { font-size: 0.56rem; }
+  .lane h3 { font-size: 0.88rem; margin-bottom: 0.15rem; }
+  .lane p { font-size: 0.78rem; line-height: 1.35; }
+  .callout { padding: 0.75rem 0.9rem; margin: 1.1rem 0; }
+  .callout h3 { font-size: 1rem; }
+  .callout p { font-size: 0.88rem; }
 }
 """
 
@@ -397,7 +435,7 @@ BASE_TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=7">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
 </head>
 <body>
@@ -405,13 +443,13 @@ BASE_TEMPLATE = """<!DOCTYPE html>
   <div class="wrap">
     <div class="brand">
       <a href="index.html" class="brand-title">Holy Trinity <span>Caisse</span></a>
-      <span class="brand-tag">A parish mutual-aid economy · under PAIX</span>
+      <span class="brand-tag">Lenexa · under PAIX</span>
     </div>
   </div>
 </header>
 <div class="pre-approval">
   <div class="wrap">
-    <strong>Pre-approval</strong> · This is a proposal being prepared for Holy Trinity Parish, Lenexa. Nothing here has been blessed by a pastor, approved by a chancery, or negotiated with Amazon.
+    <strong>Pre-approval</strong> A proposal for Holy Trinity Parish, Lenexa. Not yet approved by pastor, chancery, or Amazon.
   </div>
 </div>
 <nav class="site">
@@ -471,42 +509,38 @@ def render_markdown(md_text):
 def build_index():
     body = """
 <section class="hero">
-  <h1>The Holy Trinity Caisse</h1>
-  <p class="sub">A parish-scale mutual-aid economy. Under the umbrella of PAIX.<br>
-     The Fathers' work, continued — with the technology of our own century.</p>
-  <div class="rule">One good deed. One witness. One hour. One token.</div>
+  <div class="hero-rule">One good deed. One witness. One hour. One token.</div>
+  <h1>Four lanes. One caisse. One neighbor served.</h1>
 </section>
 
-<section>
-  <h2>Four lanes. One caisse. One neighbor served.</h2>
+<section class="lanes-section">
   <div class="lanes">
-    <div class="lane">
-      <div class="num">I</div>
+    <a class="lane" href="economic-model.html">
+      <div class="lane-head"><span class="num">I</span><span class="lane-tag">Shopping</span></div>
       <h3>Certified shopping</h3>
-      <p>Any parishioner in good standing is certified by the parish and their ordinary purchases quietly direct the stewardship spread — about 17% — into the common fund.</p>
-    </div>
-    <div class="lane">
-      <div class="num">II</div>
+      <p>Parishioner shops with the caisse code at retail; the nonprofit-procurement spread lands in the common fund.</p>
+    </a>
+    <a class="lane" href="charter.html">
+      <div class="lane-head"><span class="num">II</span><span class="lane-tag">Deeds</span></div>
       <h3>Deeds &amp; donations</h3>
-      <p>An hour of service witnessed and signed into the ledger becomes one token. Dollar donors, moved by the works being done, feed the same fund.</p>
-    </div>
-    <div class="lane">
-      <div class="num">III</div>
+      <p>An hour of service witnessed becomes one token. Dollar donors feed the same fund.</p>
+    </a>
+    <a class="lane" href="content-pipeline.html">
+      <div class="lane-head"><span class="num">III</span><span class="lane-tag">Witness</span></div>
       <h3>PAIX Witness</h3>
-      <p>Deed clips published under a shared Catholic imprint on YouTube, X, and Meta. All monetization returns to the caisse. Attention becomes bread.</p>
-    </div>
-    <div class="lane">
-      <div class="num">IV</div>
+      <p>Deed clips published under a shared Catholic imprint. All monetization returns to the caisse.</p>
+    </a>
+    <a class="lane" href="charter.html#article-vii">
+      <div class="lane-head"><span class="num">IV</span><span class="lane-tag">Trade</span></div>
       <h3>Professional services</h3>
-      <p>An hour of a professional's trade, donated to a neighbor at full market rate. The provider chooses 0–30% walk-away as caisse credit for their own household.</p>
-    </div>
+      <p>An hour of a professional's trade at full market rate. Provider chooses 0–30% walk-away.</p>
+    </a>
   </div>
 </section>
 
 <section class="callout">
-  <h3>The whole ambition</h3>
-  <p><strong>We do not invent. We continue.</strong> Alphonse Desjardins captured a Catholic people's savings flow and redirected it to their own; Father McGivney captured the same people's insurance flow and did likewise. The Holy Trinity Caisse turns the same wheel a third time.</p>
-  <p>Same instinct. Four flows. One caisse. One neighbor served.</p>
+  <h3>We do not invent. We continue.</h3>
+  <p>Alphonse Desjardins captured a Catholic people's savings flow and redirected it to their own. Father McGivney captured the same people's insurance flow and did likewise. <strong>The Holy Trinity Caisse turns the same wheel a third time.</strong></p>
 </section>
 
 <section>
@@ -514,7 +548,7 @@ def build_index():
   <div class="docs-list">
     <a class="doc-row" href="charter.html">
       <span class="doc-title">I. The Charter</span>
-      <span class="doc-desc">The Rule, six Articles, five Flows, the Order, the Fathers' Work Continued, the Posture, the Promise, the Public Witness</span>
+      <span class="doc-desc">The Rule, seven Articles, five Flows, the Order, the Fathers' Work Continued, the Posture, the Promise, the Public Witness</span>
     </a>
     <a class="doc-row" href="history.html">
       <span class="doc-title">II. Two Fathers of Mutual Aid</span>
