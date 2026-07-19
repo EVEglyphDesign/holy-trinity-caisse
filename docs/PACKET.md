@@ -1,3 +1,5 @@
+> **Status: pre-approval.** This packet is a proposal being prepared for presentation to Holy Trinity Parish in Lenexa, Kansas. Nothing here has been blessed by a pastor, approved by a chancery, or negotiated with Amazon. It is a design, not a program.
+
 # The Holy Trinity Caisse — Founding Packet
 
 *Four lanes. One caisse. One neighbor served.*

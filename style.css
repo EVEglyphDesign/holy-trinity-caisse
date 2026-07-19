@@ -60,6 +60,18 @@ header.site {
   color: var(--ink-soft);
   letter-spacing: 0.03em;
 }
+.pre-approval {
+  background: #fdf5df;
+  border-top: 1px solid #d8c992;
+  border-bottom: 1px solid #d8c992;
+  color: #6b5a1a;
+  padding: 0.55rem 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.pre-approval strong { color: #4a3f10; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.75rem; }
+.pre-approval .wrap { max-width: 780px; padding: 0 1.4rem; margin: 0 auto; }
 nav.site {
   border-bottom: 1px solid var(--rule);
   background: var(--parchment);

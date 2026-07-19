@@ -78,7 +78,7 @@ Not money. Not endorsement of a concept. Not a program integration.
 
 That is the entire first ask. No dollars committed. No council resources deployed beyond the time of two or three Knights willing to sign their name beside a deed, and the ordinary Amazon spending your Knights already do.
 
-## Three things I want to be honest about
+## Five things I want to be honest about
 
 Because a Knight deserves a real ask and not a polished one:
 
@@ -86,7 +86,11 @@ Because a Knight deserves a real ask and not a polished one:
 
 **Two — PAIX Witness monetization takes 6–18 months.** YouTube, X, and Meta all require threshold volumes before revenue starts. Lane 3 is $0 in the year-1 baseline. Any revenue there is upside, not core to the model. The caisse's year-1 viability rests on lanes 1, 2, and 4.
 
-**Three — a single scandal can kill the video lane permanently.** A minor filmed without guardian consent, a beneficiary shamed in a clip, a demonetization event — any of these can zero out lane 3 and damage the caisse's reputation across all four lanes. The evidence protocol enclosed with this letter defines what is *never* on video, and the steward is not merely a certifier but a standards editor with a veto. The Knights' judgment on this, once you have read the protocol, will be gratefully received.
+**Three — the affiliate rate is 1–10% until we negotiate the full nonprofit-procurement stack.** Standard Amazon Associates pays 1–10% depending on category. The higher 14–22% figures elsewhere in this packet assume Amazon Business nonprofit purchasing, ATEP sales-tax exemption, and cooperative-purchasing contracts stacked together — which require the parish to charter its 501(c)(3) instrument first and negotiate its Amazon Business account second. Until those are done, communicate 1–10% as the honest range. The 17% figure is the target for the mature caisse, not the day-one number.
+
+**Four — there is also a proposed PAIX World Fund for non-parishioner shoppers.** Anyone — Catholic or not, parishioner or not — could route their Amazon spend through a network-level code, with the flowback landing in a shared PAIX World Fund rather than in any single parish. There is no legal restriction on non-Catholics supporting a Catholic-affiliated 501(c)(3) instrument in the United States. The World Fund entity has not been chartered yet and is a design proposal, not a program. Details in the enclosed [World Fund page](/docs/09_world_fund/world_fund.md).
+
+**Five — a single scandal can kill the video lane permanently.** A minor filmed without guardian consent, a beneficiary shamed in a clip, a demonetization event — any of these can zero out lane 3 and damage the caisse's reputation across all four lanes. The evidence protocol enclosed with this letter defines what is *never* on video, and the steward is not merely a certifier but a standards editor with a veto. The Knights' judgment on this, once you have read the protocol, will be gratefully received.
 
 If, after four quarters, the nine public metrics hold and your council is satisfied that the caisse is what it claims to be, the conversation can widen — to matching-fund programs, to Kansas jurisdiction adoption, to the offering of the template to other Catholic parishes across the country.
 

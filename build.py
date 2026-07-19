@@ -30,6 +30,7 @@ PAGES = [
     ("knights-letter.html", "06_knights_letter/knights_letter.md", "Knights Letter", "doc"),
     ("certification-flow.html", "07_certification_flow/flow.md", "Certification & Enrollment Flow", "doc"),
     ("content-pipeline.html", "08_content_platform/pipeline.md", "PAIX Witness Content Pipeline", "doc"),
+    ("world-fund.html", "09_world_fund/world_fund.md", "PAIX World Fund", "doc"),
     ("packet.html", "PACKET.md", "Packet Cover Index", "doc"),
 ]
 
@@ -39,6 +40,7 @@ NAV = [
     ("history.html", "Two Fathers"),
     ("economic-model.html", "Economic Model"),
     ("knights-letter.html", "Knights Letter"),
+    ("world-fund.html", "World Fund"),
     ("packet.html", "Full Packet"),
 ]
 
@@ -104,6 +106,18 @@ header.site {
   color: var(--ink-soft);
   letter-spacing: 0.03em;
 }
+.pre-approval {
+  background: #fdf5df;
+  border-top: 1px solid #d8c992;
+  border-bottom: 1px solid #d8c992;
+  color: #6b5a1a;
+  padding: 0.55rem 0;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-align: center;
+}
+.pre-approval strong { color: #4a3f10; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.75rem; }
+.pre-approval .wrap { max-width: 780px; padding: 0 1.4rem; margin: 0 auto; }
 nav.site {
   border-bottom: 1px solid var(--rule);
   background: var(--parchment);
@@ -355,6 +369,11 @@ BASE_TEMPLATE = """<!DOCTYPE html>
     </div>
   </div>
 </header>
+<div class="pre-approval">
+  <div class="wrap">
+    <strong>Pre-approval</strong> · This is a proposal being prepared for Holy Trinity Parish, Lenexa. Nothing here has been blessed by a pastor, approved by a chancery, or negotiated with Amazon.
+  </div>
+</div>
 <nav class="site">
   <div class="wrap">
     {nav}

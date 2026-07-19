@@ -2,6 +2,28 @@
 
 *Four lanes. One fund. Honest ramp. Every figure sourced.*
 
+## The flywheel — why the four lanes reinforce each other
+
+*This section added after founding-packet review — it explains why the four lanes are not four independent products but one economic engine.*
+
+The **professional-services lane is the largest revenue lane on paper**, but professionals do not enroll their practice in a caisse on day one just for the promise of billing infrastructure. They enroll after the platform is already alive — after they have already been on the ledger for something else.
+
+The **certified-shopping lane is the on-ramp** that gets them on the ledger.
+
+Here is the mechanic:
+
+1. A working professional in the parish — a physician, an attorney, a plumber, a CPA, a tradesperson — is already spending real money on Amazon every month. Office supplies, tools, books, gifts, groceries. Every dollar of that spend comes out of income already taxed at their top marginal rate (federal + Kansas state + FICA — easily 35–45% for a working professional).
+2. If they route that ordinary Amazon spend through the caisse's certified-shopping link, **the ~1–10% Amazon Associates spread (or, once negotiated, the higher Amazon Business nonprofit rate)** lands in the parish caisse instead of an anonymous affiliate account. They pay the same price for the same items. They just change one link.
+3. Because the flowback lands in the caisse (a 501(c)(3) or Catholic-affiliated instrument), **it is not another line of taxable income on their personal return.** It is a community asset routed by their choice.
+4. Now they are on the ledger. Now they are watching the dashboard update every week. Now they see their neighbors' deeds witnessed. Now the caisse is not an abstraction to them — it is a working thing they helped fund without spending an extra dollar.
+5. **Then, and only then**, does the ask to enroll their professional practice for the professional-services lane become an easy yes. They are already inside. They already trust the ledger. They already know the community is real.
+
+Certified shopping is the low-friction on-ramp. Professional services is the deep well. The Rule and the ledger are what makes both trustworthy. The four lanes are one flywheel; no lane stands alone at scale.
+
+One further note honestly required: the exact Amazon Associates commission is 1–10% depending on category ([Amazon Associates rate schedule](https://affiliate-program.amazon.com/help/operating/schedule)). Rates above that (e.g. 14–22%) require **Amazon Business nonprofit purchasing** and **ATEP sales-tax exemption** stacked on cooperative-purchasing contracts, not consumer Amazon Associates. Until those are negotiated, the honest range to communicate is **1–10%**, with **17% as the target once the full nonprofit-procurement stack is in place**.
+
+---
+
 ## The question this page answers
 
 A Knights of Columbus council can already do a pancake breakfast, raise $10,000, and give away $10,000 of groceries. Why bother with a caisse?
@@ -87,6 +109,7 @@ The caisse populaire lineage lane, unchanged in the four-lane model. Assumed at 
 | 2. Deeds & donations | $12,000 |
 | 3. PAIX Witness revenue | $0 |
 | 4. Professional services (net to caisse) | $57,600 |
+| 5. PAIX World Fund (non-parishioner code) | $0 — deferred until entity is chartered |
 | **Total year-1 fund inflow** | **$90,260** |
 
 Plus **$72,000 of peer-to-peer professional value delivered** that never touched the fund's cash. Combined, the caisse's total year-1 impact — cash inflow + peer value delivered — is approximately **$162,260 for a 200-household pilot.**
@@ -99,7 +122,8 @@ Plus **$72,000 of peer-to-peer professional value delivered** that never touched
 | 2. Deeds & donations | $30,000 |
 | 3. PAIX Witness revenue | $30,000 |
 | 4. Professional services (net to caisse) | $144,000 |
-| **Total year-3 fund inflow** | **$255,650** |
+| 5. PAIX World Fund (network share; not parish inflow) | Modeled separately — see [world-fund.html](world_fund.md) |
+| **Total year-3 fund inflow to parish** | **$255,650** |
 
 Plus **$180,000 of peer-to-peer professional value delivered.** Combined year-3 impact: **~$435,650.**
 
