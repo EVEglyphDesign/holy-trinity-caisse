@@ -30,7 +30,7 @@ PAGES = [
     ("knights-letter.html", "06_knights_letter/knights_letter.md", "Knights Letter", "doc"),
     ("certification-flow.html", "07_certification_flow/flow.md", "Certification & Enrollment Flow", "doc"),
     ("content-pipeline.html", "08_content_platform/pipeline.md", "PAIX Witness Content Pipeline", "doc"),
-    ("world-fund.html", "09_world_fund/world_fund.md", "PAIX World Fund", "doc"),
+    ("paix.html", "09_paix/paix.md", "PAIX", "doc"),
     ("packet.html", "PACKET.md", "Packet Cover Index", "doc"),
 ]
 
@@ -40,7 +40,7 @@ NAV = [
     ("history.html", "Two Fathers"),
     ("economic-model.html", "Economic Model"),
     ("knights-letter.html", "Knights Letter"),
-    ("world-fund.html", "World Fund"),
+    ("paix.html", "PAIX"),
     ("packet.html", "Full Packet"),
 ]
 

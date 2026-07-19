@@ -109,7 +109,7 @@ The caisse populaire lineage lane, unchanged in the four-lane model. Assumed at 
 | 2. Deeds & donations | $12,000 |
 | 3. PAIX Witness revenue | $0 |
 | 4. Professional services (net to caisse) | $57,600 |
-| 5. PAIX World Fund (non-parishioner code) | $0 — deferred until entity is chartered |
+| 5. PAIX (non-parishioner code) | $0 — deferred until entity is chartered |
 | **Total year-1 fund inflow** | **$90,260** |
 
 Plus **$72,000 of peer-to-peer professional value delivered** that never touched the fund's cash. Combined, the caisse's total year-1 impact — cash inflow + peer value delivered — is approximately **$162,260 for a 200-household pilot.**
@@ -122,7 +122,7 @@ Plus **$72,000 of peer-to-peer professional value delivered** that never touched
 | 2. Deeds & donations | $30,000 |
 | 3. PAIX Witness revenue | $30,000 |
 | 4. Professional services (net to caisse) | $144,000 |
-| 5. PAIX World Fund (network share; not parish inflow) | Modeled separately — see [world-fund.html](world_fund.md) |
+| 5. PAIX (network share; not parish inflow) | Modeled separately — see [PAIX](paix.md) |
 | **Total year-3 fund inflow to parish** | **$255,650** |
 
 Plus **$180,000 of peer-to-peer professional value delivered.** Combined year-3 impact: **~$435,650.**
