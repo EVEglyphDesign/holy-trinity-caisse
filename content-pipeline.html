@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAIX Witness Content Pipeline — Holy Trinity Caisse</title>
+<meta name="description" content="The Holy Trinity Caisse — a parish-scale mutual-aid economy under the umbrella of PAIX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <a href="index.html" class="brand-title">Holy Trinity <span>Caisse</span></a>
+      <span class="brand-tag">A parish mutual-aid economy · under PAIX</span>
+    </div>
+  </div>
+</header>
+<nav class="site">
+  <div class="wrap">
+    <a href="index.html">Home</a>
+    <a href="charter.html">Charter</a>
+    <a href="history.html">Two Fathers</a>
+    <a href="economic-model.html">Economic Model</a>
+    <a href="knights-letter.html">Knights Letter</a>
+    <a href="packet.html">Full Packet</a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+    <h1 id="paix-witness-content-platform-pipeline">PAIX Witness — Content Platform Pipeline</h1>
+<p><em>Capture → Ingest → Cut → Distribute → Compile → Attribute → Report.</em></p>
+<p><em>A Catholic content platform, built on the men's engine, powered by the works of the whole parish, aimed at the neighbor who has not yet been served.</em></p>
+<h2 id="what-paix-witness-is">What PAIX Witness is</h2>
+<p>PAIX Witness is the third turn of the Desjardins–McGivney wheel. Desjardins captured a Catholic people's <strong>savings flow</strong> and redirected it to their own; McGivney captured the same people's <strong>insurance flow</strong> and did likewise; PAIX Witness captures the <strong>attention flow</strong> the wider world now spends on short-form video, and redirects it, too, to the neighbor.</p>
+<p>Concretely, PAIX Witness is:</p>
+<ul>
+<li>A shared publishing imprint (<code>@paixwitness</code>) on YouTube, X, Meta (Instagram + Facebook), and any successor platform;</li>
+<li>Under the shared imprint, one channel per participating parish's deed clips, cross-posted through the shared account;</li>
+<li>A content standard and evidence protocol that all participating parishes follow;</li>
+<li>A revenue-collection mechanic by which platform monetization — where it exists — flows back to each originating caisse's fund;</li>
+<li>A visible attribution — every public clip carries a link back to the originating parish's shop, so that attention becomes bread.</li>
+</ul>
+<h2 id="the-pipeline-end-to-end">The pipeline, end to end</h2>
+<pre><code>┌───────────┐   ┌────────┐   ┌─────┐   ┌────────────┐   ┌─────────┐   ┌────────────┐   ┌────────┐
+│  Capture  │──▶│ Ingest │──▶│ Cut │──▶│ Distribute │──▶│ Compile │──▶│ Attribute  │──▶│ Report │
+└───────────┘   └────────┘   └─────┘   └────────────┘   └─────────┘   └────────────┘   └────────┘
+     ▲                                                                                       │
+     └───────────────────────────── feedback loop ──────────────────────────────────────────┘
+</code></pre>
+<h2 id="stage-1-capture">Stage 1 — Capture</h2>
+<p><strong>Who captures:</strong> The witness, on their own phone. Not a videographer. Not a hired hand. <strong>The one who signs the deed into the ledger is the one who films it.</strong></p>
+<p><strong>The rule:</strong> <em>One good deed. One witness. One hour. One token. One clip — if the neighbor allows it.</em></p>
+<p><strong>Standard clip length:</strong> 20–120 seconds (per <code>shop.config.json → video_evidence_policy</code>). Long enough for the witness to speak their name and attest; short enough to travel.</p>
+<p><strong>The three verbal beats every clip carries:</strong></p>
+<ol>
+<li><strong>The witness names themselves.</strong> <em>"This is [Knight's name], witnessing at Holy Trinity Parish."</em></li>
+<li><strong>The witness names the deed.</strong> <em>"[Parishioner name] just spent an hour driving [neighbor's first name only, or "our neighbor"] to dialysis."</em></li>
+<li><strong>The consent line.</strong> <em>"[Neighbor's first name / "Our neighbor"] has agreed to be part of this witness."</em> — OR the neighbor is out of frame, or blurred, and the witness says instead: <em>"Our neighbor's privacy is protected."</em></li>
+</ol>
+<p>If the clip is to be <strong>publicly</strong> posted (not merely unlisted), a fourth beat is added by the witness or the doer at capture time:</p>
+<ol>
+<li><strong>The monetization consent line.</strong> <em>"We consent to this clip being shared publicly under PAIX Witness."</em></li>
+</ol>
+<h2 id="stage-2-ingest">Stage 2 — Ingest</h2>
+<p><strong>Where clips go on capture:</strong> The steward's <code>/steward/publish</code> page, which accepts a direct browser upload from the witness's phone or a link to a phone-photos album entry.</p>
+<p><strong>The auto-review runs immediately</strong> (per <code>05_ledger_spec/README.md</code> § "Video review"):</p>
+<table>
+<thead>
+<tr>
+<th>Check</th>
+<th>What it verifies</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two-face rule</td>
+<td>At least two faces detected in the first 3 seconds</td>
+</tr>
+<tr>
+<td>Verbal witness line</td>
+<td>Speech-to-text finds <code>witness|attest|saw|swear|received</code></td>
+</tr>
+<tr>
+<td>No minors OR guardian consent</td>
+<td>Face-age estimation; guardian consent line detected if minor present</td>
+</tr>
+<tr>
+<td>Duration and file bounds</td>
+<td>20–120s, ≤500MB, standard codec</td>
+</tr>
+</tbody>
+</table>
+<p>The ingest layer writes a <code>videos</code> row with <code>auto_review_passed</code>, <code>steward_review_status = 'pending'</code>, and stores the raw upload in the parish's private storage (Google Drive, iCloud, or Fly.io volume).</p>
+<h2 id="stage-3-cut">Stage 3 — Cut</h2>
+<p>The standards editor — a role the steward or a designated Knight fills — reviews the queue on the <code>/steward/publish</code> page. For each clip, one of five decisions:</p>
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Approve public</strong></td>
+<td>The clip goes to the public wall AND to the cross-post platforms</td>
+</tr>
+<tr>
+<td><strong>Approve unlisted</strong></td>
+<td>The clip is kept in the private archive; not published anywhere</td>
+</tr>
+<tr>
+<td><strong>Approve public, blur beneficiary</strong></td>
+<td>The clip is auto-blurred on the recipient's face, then published</td>
+</tr>
+<tr>
+<td><strong>Request re-record</strong></td>
+<td>The witness is asked to reshoot with a specific fix (better audio, add consent line, cover minor's face)</td>
+</tr>
+<tr>
+<td><strong>Reject</strong></td>
+<td>The clip is deleted from the archive; the deed itself remains in the ledger</td>
+</tr>
+</tbody>
+</table>
+<p>The standards editor's job is not artistic. It is <strong>guardrail-tending.</strong> The standards are:</p>
+<ul>
+<li><strong>What is never on video</strong> (per <code>shop.config.json → video_evidence_policy.what_is_never_on_video</code>):</li>
+<li>Financial coercion or debt-relief moments (a neighbor accepting money on camera)</li>
+<li>Medical or hygiene intimacy</li>
+<li>Minors without a spoken guardian consent line</li>
+<li>A beneficiary in visible economic distress without face blur</li>
+<li>Any deed where the beneficiary declined capture</li>
+<li><strong>What must always be there:</strong> The witness's name, the deed named plainly, the consent line.</li>
+<li><strong>What must never be there:</strong> A sponsor logo, a rating scale, a leaderboard, a "donate now" banner, or any language that turns the neighbor into a case study.</li>
+</ul>
+<h2 id="stage-4-distribute">Stage 4 — Distribute</h2>
+<p>Approved-public clips are cross-posted by <code>scripts/cross_post.js</code> through the three platform interfaces:</p>
+<ul>
+<li><strong><code>platforms/youtube.js</code></strong> uploads the full 20–120s clip to <code>@paixwitness</code> on YouTube, tags it with the parish name and deed category, sets the description to include the standard attribution paragraph (below), adds it to the parish's channel playlist.</li>
+<li><strong><code>platforms/x.js</code></strong> posts the clip natively to <code>@paixwitness</code> on X (X's algorithm favors native video over links), with a caption drawn from the deed description, and the attribution URL in the tweet body.</li>
+<li><strong><code>platforms/meta.js</code></strong> posts the clip as a Reel on both <code>@paixwitness</code> on Instagram and <code>paixwitness</code> on Facebook, with the standard attribution in the caption.</li>
+</ul>
+<p><strong>The standard attribution paragraph</strong> (rendered in every platform's description/caption field):</p>
+<blockquote>
+<p><em>A neighbor helped a neighbor at [Parish name] in [City, State]. One good deed, one witness, one hour, one token — that is the Rule of the caisse. Every hour donated feeds the parish's mutual-aid fund; every dollar the fund earns from attention like yours returns to the neighbor. Learn more or shop under the parish's roof at [shop.URL]. Vivat Jesus.</em></p>
+</blockquote>
+<p>Every clip's description ends with the same attribution shop URL — that is how the attention flow becomes a <strong>bread flow.</strong></p>
+<h2 id="stage-5-compile">Stage 5 — Compile</h2>
+<p>Weekly, <code>scripts/compile_weekly.js</code> produces:</p>
+<ul>
+<li>A <strong>compilation reel</strong> for YouTube (60–90s montage of that week's approved-public clips) — this is where the algorithmic reach lives, because compilation content outperforms single-deed content on YouTube Shorts;</li>
+<li>A <strong>weekly digest post</strong> for X threading three still frames + three clip links, with a summary line ("<em>This week at Holy Trinity: 12 hours of deeds attested by 8 witnesses. See them at ↓</em>");</li>
+<li>A <strong>weekly IG Story sequence</strong> for Meta, cross-linked to the reels.</li>
+</ul>
+<p>Cross-parish compilations — for participating parishes across multiple dioceses — are the eventual reach lever. A single Holy Trinity parish's channel will grow slowly; a five-parish PAIX Witness compilation reel reaches meaningfully faster.</p>
+<h2 id="stage-6-attribute">Stage 6 — Attribute</h2>
+<p>Every public clip's description carries the attribution URL to the originating parish's shop. Every attention click on that URL is a candidate certification, a candidate donation, a candidate parishioner asking to be included.</p>
+<p>Attribution is tracked plainly, in shop analytics — no third-party trackers, no pixels, no cross-site cookies. Just: which platform did the shop visitor come from, and did they certify, donate, or buy?</p>
+<h2 id="stage-7-report">Stage 7 — Report</h2>
+<p><strong>Monthly, on the first of the month,</strong> <code>scripts/import_revenue.js</code> runs under GitHub Actions:</p>
+<ol>
+<li>Pulls YouTube AdSense CSV for the prior month, matches by publish-date, credits gross and net revenue to <code>platform_revenue</code> with <code>platform = 'youtube'</code>;</li>
+<li>Pulls X Creator Revenue Report, credits similarly;</li>
+<li>Pulls Meta Reels Play bonus / Content Monetization report, credits similarly;</li>
+<li>Sums into the ledger's fund solvency view;</li>
+<li>Publishes the updated dashboard metric #7 (PAIX Witness revenue, trailing quarter, by platform).</li>
+</ol>
+<p><strong>Every dollar earned belongs to the caisse's fund</strong>, per Charter Article V. Not to the parishioners in the clips. Not to the videographers. Not to the standards editor. Not to PAIX overhead.</p>
+<h2 id="roles">Roles</h2>
+<p><em>The men's engine builds and maintains; the parish drives it.</em></p>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Filled by</th>
+<th>Load</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Witness / capturer</strong></td>
+<td>Any parishioner present at a deed</td>
+<td>~1 min per deed</td>
+</tr>
+<tr>
+<td><strong>Standards editor</strong></td>
+<td>Steward, or a designated Knight</td>
+<td>~10 min per week, reviewing the queue</td>
+</tr>
+<tr>
+<td><strong>Cross-post operator</strong></td>
+<td>Same steward, or automation</td>
+<td>Automated after Day-5 setup</td>
+</tr>
+<tr>
+<td><strong>Monthly revenue importer</strong></td>
+<td>GitHub Actions cron</td>
+<td>0 min ongoing</td>
+</tr>
+<tr>
+<td><strong>Handles registrant</strong></td>
+<td>The parish's tech-comfortable Knight</td>
+<td>1 hour, once, at setup</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A single steward with a single hour a week can operate the entire PAIX Witness pipeline for a single-parish caisse.</strong> Scale to a five-parish federation adds perhaps two hours a week; a standards editor and a cross-post operator can be different Knights by then.</p>
+<h2 id="guardrails-encoded-not-proclaimed">Guardrails (encoded, not proclaimed)</h2>
+<p>Everything in this list is either enforced by <code>shop.config.json</code> policy, by database constraint, or by the standards editor's five approval buttons. None of it is proclaimed on the channel itself:</p>
+<ul>
+<li>No sponsorship of individual clips by outside brands.</li>
+<li>No "donate now" call-to-action within a clip. Attribution is a link in the description, not a plea in the audio.</li>
+<li>No branded merchandise; no fundraising products; no product-placement in the frame.</li>
+<li>No case-study language about beneficiaries. Every neighbor is a first name, or "our neighbor."</li>
+<li>No leaderboard, ranking, or "top parishioner of the week" content.</li>
+<li>No political commentary, no partisan framing, no denunciation of anyone by name.</li>
+<li>No borrowed music the platform will demonetize; only the parish's own audio or platform-licensed music.</li>
+<li>No AI-generated faces, voices, or fabricated attestations.</li>
+<li><strong>The clip is a witness, not an advertisement. It sells nothing. It only shows what was done.</strong></li>
+</ul>
+<p>The posture is quiet. The channel does not tell the world what it refuses to be. It simply is not those things, week after week.</p>
+<h2 id="the-one-week-paix-witness-setup">The one-week PAIX Witness setup</h2>
+<ul>
+<li><strong>Day 1:</strong> Register <code>@paixwitness</code> on YouTube, X, Instagram, Facebook. Register <code>paixwitness.example.org</code> (or similar).</li>
+<li><strong>Day 2:</strong> Configure <code>platforms/youtube.js</code>, <code>platforms/x.js</code>, <code>platforms/meta.js</code> with API keys, using the <code>custom-credentials</code> pattern.</li>
+<li><strong>Day 3:</strong> Build <code>/steward/publish</code> page with auto-review + five-button standards-editor decisions.</li>
+<li><strong>Day 4:</strong> Build <code>scripts/cross_post.js</code> and <code>scripts/compile_weekly.js</code>.</li>
+<li><strong>Day 5:</strong> Test end-to-end with three seed clips; verify auto-review, standards-editor flow, cross-post, attribution.</li>
+<li><strong>Day 6:</strong> Standards-editor training walk-through with the steward, pastor, and a designated Knight.</li>
+<li><strong>Day 7:</strong> First real deed captured, ingested, cut, published, compiled, attributed. The neighbor's face is protected. The Knight's name is spoken. The Rule holds. The wheel turns.</li>
+</ul>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><em>The Fathers' work, continued. Vivat Jesus.</em></p>
+    <p>One good deed. One witness. One hour. One token.</p>
+  </div>
+</footer>
+</body>
+</html>

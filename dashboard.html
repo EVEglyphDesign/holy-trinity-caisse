@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Public Ledger — Dashboard — Holy Trinity Caisse</title>
+<meta name="description" content="The Holy Trinity Caisse — a parish-scale mutual-aid economy under the umbrella of PAIX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <a href="index.html" class="brand-title">Holy Trinity <span>Caisse</span></a>
+      <span class="brand-tag">A parish mutual-aid economy · under PAIX</span>
+    </div>
+  </div>
+</header>
+<nav class="site">
+  <div class="wrap">
+    <a href="index.html">Home</a>
+    <a href="charter.html">Charter</a>
+    <a href="history.html">Two Fathers</a>
+    <a href="economic-model.html">Economic Model</a>
+    <a href="knights-letter.html">Knights Letter</a>
+    <a href="packet.html">Full Packet</a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+    <h1 id="holy-trinity-caisse-public-dashboard-specification">Holy Trinity Caisse — Public Dashboard Specification</h1>
+<p><em>"For a caisse that hides its ledger has already ceased to be one."</em> — Charter, §The Promise</p>
+<h2 id="purpose">Purpose</h2>
+<p>A single public page — no login, no analytics, no ads — that renders the numbers a skeptic can use to verify the caisse is real, solvent, and doing what it claims. Refreshed nightly from the ledger. Anyone can bookmark it and check.</p>
+<p><strong>URL (proposed):</strong> <code>caisse.holytrinity.example.org/ledger</code> (or <code>holytrinitycaisse.example.org</code> for a standalone shell)</p>
+<h2 id="the-seven-proof-metrics">The Seven Proof-Metrics</h2>
+<p>Each metric has a headline number, a plain-English definition, a target band, and a sparkline of the last 12 weeks.</p>
+<h3 id="1-token-velocity">1. Token Velocity</h3>
+<blockquote>
+<p><strong>Median days from token earned to token spent.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> Deeds are being done and redeemed. Tokens are not hoarded (theatre) or dying in dormant accounts (shop doesn't stock what people need).</li>
+<li><strong>Target band:</strong> 30–90 days.</li>
+<li><strong>Alert if:</strong> &gt; 180 days (catalog problem) or &lt; 7 days (possible round-tripping — investigate).</li>
+<li><strong>Displayed as:</strong> <em>"Median token lifespan: </em><em>47 days.</em><em> Half of tokens earned are spent within 47 days of the deed."</em></li>
+</ul>
+<h3 id="2-fund-solvency-ratio">2. Fund Solvency Ratio</h3>
+<blockquote>
+<p><strong>Dollars in the pooled fund ÷ outstanding token liability.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> The caisse can settle every token in circulation with a vendor payment. Below 1.0, the caisse is technically insolvent.</li>
+<li><strong>Target band:</strong> ≥ $1.00 per outstanding token.</li>
+<li><strong>Alert if:</strong> &lt; $0.75 (call the stewards) or &gt; $3.00 (donors outpacing deed-earners — expand catalog or witness network).</li>
+<li><strong>Displayed as:</strong> <em>"Solvency: </em><em>$1.24 per token.</em><em> For every token in a parishioner's account, the fund holds $1.24 to settle it."</em></li>
+</ul>
+<h3 id="3-procurement-spread">3. Procurement Spread</h3>
+<blockquote>
+<p><strong>(Retail dollar value delivered − Actual dollars paid to vendors) ÷ Retail dollar value delivered.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> The Amazon Business + ATEP + OMNIA + rebate stack is delivering the claimed savings. This is the parish's version of a caisse populaire's interest spread.</li>
+<li><strong>Target band:</strong> ≥ 15%.</li>
+<li><strong>Alert if:</strong> &lt; 10% (renegotiate with account executive) or &gt; 30% (verify math — likely category-mix issue).</li>
+<li><strong>Displayed as:</strong> <em>"Spread: </em><em>17.3%.</em><em> For every $100 of goods delivered at retail value, the caisse pays $82.70 — the difference is stewardship, not profit."</em></li>
+</ul>
+<h3 id="4-deed-diversity-index">4. Deed Diversity Index</h3>
+<blockquote>
+<p><strong>Count of distinct earner-parishioners in the trailing 90 days.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> The caisse is a network, not a household. Diversity is what makes it <em>catholic</em> (small-c: universal).</li>
+<li><strong>Target band:</strong> ≥ 20 in the first 6 months; ≥ 50 by end of year 1.</li>
+<li><strong>Alert if:</strong> &lt; 10 for two consecutive months (witness network too small).</li>
+<li><strong>Displayed as:</strong> <em>"Contributors: </em><em>34 parishioners.</em><em> Distinct people who earned at least one token in the last 90 days."</em></li>
+</ul>
+<h3 id="5-household-participation-rate">5. Household Participation Rate</h3>
+<blockquote>
+<p><strong>% of parish households that routed at least one certified purchase through the caisse in the trailing 90 days.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> The parish has actually shifted its consumer behavior. This is the metric that says lane 1 (certified shopping) is real, not aspirational.</li>
+<li><strong>Target band:</strong> ≥ 40% by end of year 1; ≥ 60% by end of year 2.</li>
+<li><strong>Alert if:</strong> &lt; 20% at end of quarter 2 (the certification funnel is broken; steward outreach needed).</li>
+<li><strong>Displayed as:</strong> <em>"Participation: </em><em>43% of households.</em><em> 187 of 434 registered households shopped through the caisse in the last 90 days."</em></li>
+</ul>
+<h3 id="6-deed-video-coverage">6. Deed Video Coverage</h3>
+<blockquote>
+<p><strong>% of deeds in the ledger that carry a linked video record (unlisted or public) on at least one witness platform.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> The caisse doesn't just count deeds; it can show them. This is the honesty metric — the check against a ledger inflated by paper attestations.</li>
+<li><strong>Target band:</strong> ≥ 85% by end of year 1.</li>
+<li><strong>Alert if:</strong> &lt; 60% (evidence workflow is failing; retrain witnesses).</li>
+<li><strong>Displayed as:</strong> <em>"Video-witnessed: </em><em>91% of deeds.</em><em> 374 of the 412 deeds this quarter carry a video record."</em></li>
+</ul>
+<h3 id="7-public-witness-revenue">7. Public Witness Revenue</h3>
+<blockquote>
+<p><strong>Dollars flowing to the caisse fund from public witness platforms in the trailing quarter, itemized by platform.</strong></p>
+</blockquote>
+<ul>
+<li><strong>Proves:</strong> Lane 3 is real. The parish's public witness is not merely propagation; it is a self-funding surface.</li>
+<li><strong>Target band:</strong> Any positive figure in year 1; ≥ $10,000/year by end of year 2 (single-platform threshold).</li>
+<li><strong>Alert if:</strong> No revenue for three consecutive quarters after channels reach eligibility (propagation cadence is broken).</li>
+<li><strong>Displayed as:</strong> <em>"Public witness revenue this quarter: </em><em>$1,687</em><em>"</em> — with per-platform breakdown table:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Revenue Q3 2026</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>YouTube</td>
+<td>$847</td>
+<td>Monetized</td>
+</tr>
+<tr>
+<td>X</td>
+<td>$312</td>
+<td>Monetized</td>
+</tr>
+<tr>
+<td>Meta (IG/FB)</td>
+<td>$528</td>
+<td>Monetized</td>
+</tr>
+<tr>
+<td>Other</td>
+<td>$0</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-page-written-out">The Page, Written Out</h2>
+<pre><code>────────────────────────────────────────────────
+  HOLY TRINITY CAISSE — Public Ledger
+  Updated nightly · Last refresh: 2026-07-18 23:00 CDT
+────────────────────────────────────────────────
+
+  Token lifespan          Solvency
+  47 days                 $1.24 per token
+  ▁▂▃▃▄▅▄▅▆▅▆▇            ▄▅▅▆▆▇▇▇▆▇▇▇
+
+  Procurement spread      Contributors (90d)
+  17.3%                   34 parishioners
+  ▂▃▄▄▅▆▆▇▇▇▇▇            ▁▂▂▃▃▄▄▅▅▆▆▇
+
+  Household participation Video coverage
+  43% of households       91% of deeds
+  ▂▃▃▄▄▅▅▆▆▆▇▇            ▄▅▅▆▆▇▇▇▇▇▇▇
+
+  Public witness revenue (this quarter)
+  $1,687   [YouTube $847 · X $312 · Meta $528]
+
+────────────────────────────────────────────────
+  Tokens earned this quarter:     412
+  Tokens spent this quarter:      378
+  Certified households:           434
+  Certified purchases (Q):        1,247 · $18,340 retail
+  Spread returned to fund (Q):    $3,162
+  Dollars donated (Q):            $9,840
+  Public witness revenue (Q):     $1,687
+  ─────────────────────────────
+  Total fund inflow (Q):          $14,689
+  Dollars paid to vendors:        $12,203
+  Retail value delivered:         $19,285
+────────────────────────────────────────────────
+
+  Full charter · Quarterly report (PDF) · About PAIX
+────────────────────────────────────────────────
+</code></pre>
+<p>That is the whole page. No dashboards behind logins. No aggregate charts of individual behavior. Parishioner names are never on this page — only counts.</p>
+<h2 id="the-public-deed-wall">The Public Deed Wall</h2>
+<p>A separate page at <code>caisse.holytrinity.example.org/deeds</code> renders the wall of publicly-consented deed clips as a grid of thumbnails, each 20–90 seconds, each with:</p>
+<ul>
+<li>Deed category (elder transport, tutoring, meal delivery, etc.)</li>
+<li>Month and year</li>
+<li>The witness's name (never the beneficiary's, unless they explicitly opted in)</li>
+<li>A click-through to the clip on its home platform (YouTube for the durable archive; X and Meta as propagation surfaces linked from the same source)</li>
+</ul>
+<p>Only deeds with <code>youtube_privacy = 'public'</code> AND <code>beneficiary_consent_given = 1</code> appear on this wall. Unlisted deeds still count in ledger aggregates but do not appear.</p>
+<p>The wall is the evangelism surface — the place a Grand Knight sends his brothers on Monday morning, the place a bishop's communications office finds material, the place a mother in Missouri sees her son's Knights of Columbus witness clip.</p>
+<h2 id="data-sources">Data Sources</h2>
+<ul>
+<li><strong>Ledger DB</strong> (SQLite, <code>holy-trinity-caisse</code> repo) — deeds, witnesses, redemptions, transfers, certifications.</li>
+<li><strong>Vendor invoice log</strong> (Amazon Business exports + local merchant receipts) — actual dollars paid.</li>
+<li><strong>Donor CRM</strong> (Stripe + manual entries) — dollars in.</li>
+<li><strong>Catalog</strong> (<code>shop.config.json</code>) — retail prices, token prices, actual expected prices.</li>
+<li><strong>Platform revenue exports</strong> (YouTube AdSense CSV, X Creator monetization report, Meta Creator Studio) — imported monthly into <code>revenue/YYYY-MM.json</code>.</li>
+</ul>
+<p>A nightly Node script recomputes all seven metrics and writes them to <code>public/ledger.json</code>, which the static page reads.</p>
+<h2 id="what-is-not-on-the-dashboard">What is <em>not</em> on the dashboard</h2>
+<p>Deliberately absent:</p>
+<ul>
+<li><strong>Individual parishioner balances or names.</strong> Ever. The witness ledger is stewarded, not published.</li>
+<li><strong>Beneficiary faces in aggregate imagery.</strong> The Public Deed Wall shows only doer-and-witness clips or auto-blurred beneficiary clips.</li>
+<li><strong>Donor amounts by name.</strong> Aggregate only, unless the donor explicitly consents to be listed.</li>
+<li><strong>Growth vanity metrics.</strong> No "signups," no "engagement," no MAU. The caisse is not a platform.</li>
+<li><strong>Charity-porn imagery.</strong> No "meet the family we helped." Dignity is structural, not decorative.</li>
+</ul>
+<h2 id="what-this-dashboard-enables">What this dashboard enables</h2>
+<p>When a Grand Knight, a bishop, an auditor, or a skeptical journalist visits <code>caisse.holytrinity.example.org/ledger</code>, they can — in under thirty seconds — determine:</p>
+<ol>
+<li>Is anything actually happening? <em>(Token velocity, contributors, participation.)</em></li>
+<li>Is it solvent? <em>(Fund solvency ratio.)</em></li>
+<li>Is the economic thesis real? <em>(Procurement spread, spread returned to fund.)</em></li>
+<li>Is it a real network, or a two-family favor economy? <em>(Deed diversity, participation rate.)</em></li>
+<li>Can the deeds be seen, or only claimed? <em>(Video coverage.)</em></li>
+<li>Does the public witness pay for itself? <em>(PAIX Witness revenue.)</em></li>
+<li>Is the parish's professional class contributing, and at what personal cost? <em>(Professional services delivered + average walk-away.)</em></li>
+</ol>
+<p>If those nine numbers hold for two quarters, PAIX has proven its economic model. That is the entire point.</p>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><em>The Fathers' work, continued. Vivat Jesus.</em></p>
+    <p>One good deed. One witness. One hour. One token.</p>
+  </div>
+</footer>
+</body>
+</html>

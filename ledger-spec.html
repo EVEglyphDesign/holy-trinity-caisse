@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ledger & Shop Technical Spec — Holy Trinity Caisse</title>
+<meta name="description" content="The Holy Trinity Caisse — a parish-scale mutual-aid economy under the umbrella of PAIX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <a href="index.html" class="brand-title">Holy Trinity <span>Caisse</span></a>
+      <span class="brand-tag">A parish mutual-aid economy · under PAIX</span>
+    </div>
+  </div>
+</header>
+<nav class="site">
+  <div class="wrap">
+    <a href="index.html">Home</a>
+    <a href="charter.html">Charter</a>
+    <a href="history.html">Two Fathers</a>
+    <a href="economic-model.html">Economic Model</a>
+    <a href="knights-letter.html">Knights Letter</a>
+    <a href="packet.html">Full Packet</a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+    <h1 id="holy-trinity-caisse-ledger-shop-paix-witness-technical-spec">Holy Trinity Caisse — Ledger, Shop &amp; PAIX Witness Technical Spec</h1>
+<p>This is the technical spine of the caisse. It is intentionally small. The whole thing should fit in one repository, one steward's head, and one page of documentation. It covers <strong>four lanes</strong>: certified shopping, deeds &amp; donations, PAIX Witness content, and professional services.</p>
+<h2 id="repository-structure">Repository structure</h2>
+<p>Fork the existing storage shop into a new repo:</p>
+<pre><code>holy-trinity-caisse/
+├── README.md                       # This file
+├── charter.md                      # Framed copy of the charter
+├── shop.config.json                # Catalog, certification policy, video policy, prof-services policy
+├── data/
+│   ├── caisse.db                   # SQLite ledger (all four lanes)
+│   ├── donors.csv                  # Stripe-synced donor log
+│   └── vendor_receipts/            # Invoices from Amazon Business + local merchants
+├── revenue/                        # Monthly platform revenue imports (lane 3)
+│   ├── youtube_YYYY-MM.json
+│   ├── x_YYYY-MM.json
+│   └── meta_YYYY-MM.json
+├── public/
+│   ├── index.html                  # Public shop skin
+│   ├── ledger.html                 # Nine-metric dashboard
+│   ├── deeds.html                  # Public Deed Wall (curated public clips)
+│   └── ledger.json                 # Nightly-computed metrics
+├── steward/                        # Steward-only (auth-gated) pages
+│   ├── queue.html                  # Certification + deed + prof-services review
+│   ├── attest.html                 # Witness signs a deed
+│   ├── approve.html                # Steward approves a redemption
+│   ├── order.html                  # Steward places the vendor order
+│   ├── prof_service.html           # Log a professional service, set walk-away
+│   └── publish.html                # Approve/reject video for public wall + cross-post
+├── vendors/
+│   ├── amazon.js                   # Amazon Business order interface
+│   ├── local_grocer.js             # Template for signed-covenant local merchants
+│   └── manual.js                   # Fallback: paste tracking number
+├── platforms/                      # PAIX Witness cross-post interfaces
+│   ├── youtube.js                  # YouTube Data API (upload, playlist, unlisted/public)
+│   ├── x.js                        # X (Twitter) API (post video, attribution link)
+│   └── meta.js                     # Meta Graph API (IG Reels, FB Reels)
+├── scripts/
+│   ├── mint_token.js               # Called by witness after attesting a deed
+│   ├── mint_credit.js              # Called after professional-service attestation
+│   ├── redeem.js                   # Debits tokens/credit, queues steward approval
+│   ├── settle.js                   # Debits fund, records vendor payment
+│   ├── cross_post.js               # Push clip to YouTube + X + Meta
+│   ├── import_revenue.js           # Monthly platform revenue CSV → revenue/*.json
+│   └── recompute_metrics.js        # Nightly cron
+└── .github/workflows/
+    ├── nightly.yml                 # Recompute metrics 23:00 CT
+    └── monthly_revenue.yml         # First of month: import platform revenue
+</code></pre>
+<h2 id="the-database-caissedb-sqlite">The database: <code>caisse.db</code> (SQLite)</h2>
+<p>Nine tables. That is the whole ledger.</p>
+<h3 id="1-parishioners-the-certification-roll">1. Parishioners (the certification roll)</h3>
+<pre><code class="language-sql">CREATE TABLE parishioners (
+  id INTEGER PRIMARY KEY,
+  phone TEXT NOT NULL UNIQUE,
+  display_name TEXT NOT NULL,
+  claimed_parish TEXT,
+  code TEXT UNIQUE,                        -- 'HT-4291-KANE'; null until certified
+  household_id INTEGER,
+  status TEXT NOT NULL DEFAULT 'pending',  -- pending | certified | flagged | declined
+  certified_on DATETIME,
+  certified_by INTEGER REFERENCES parishioners(id),
+  auto_approved BOOLEAN DEFAULT 0,
+  notes TEXT,
+  joined_on DATE NOT NULL DEFAULT CURRENT_DATE
+);
+
+CREATE VIEW v_certification_queue AS
+  SELECT id, phone, display_name, claimed_parish, joined_on
+  FROM parishioners
+  WHERE status = 'pending'
+  ORDER BY joined_on ASC;
+</code></pre>
+<h3 id="2-deeds-lane-2-the-token-lane">2. Deeds (lane 2: the token lane)</h3>
+<pre><code class="language-sql">CREATE TABLE deeds (
+  id INTEGER PRIMARY KEY,
+  earner_id INTEGER NOT NULL REFERENCES parishioners(id),
+  witness_id INTEGER NOT NULL REFERENCES parishioners(id),
+  description TEXT NOT NULL,
+  hours REAL NOT NULL,
+  performed_on DATE NOT NULL,
+  attested_on DATETIME NOT NULL,
+  video_id INTEGER REFERENCES videos(id),
+  CHECK (earner_id != witness_id)
+);
+</code></pre>
+<h3 id="3-professional-services-lane-4-the-credit-lane">3. Professional services (lane 4: the credit lane)</h3>
+<pre><code class="language-sql">CREATE TABLE parishioner_credentials (
+  id INTEGER PRIMARY KEY,
+  parishioner_id INTEGER NOT NULL REFERENCES parishioners(id),
+  credential_type TEXT NOT NULL,           -- 'jd_bar', 'md', 'cpa', 'plumbing_license', ...
+  credential_ref TEXT,
+  jurisdiction TEXT,
+  standard_market_rate_dollars_per_hour REAL NOT NULL,
+  default_walkaway_fraction REAL NOT NULL DEFAULT 0.20,
+  verified_on DATE,
+  verified_by INTEGER REFERENCES parishioners(id),
+  CHECK (default_walkaway_fraction &gt;= 0.0 AND default_walkaway_fraction &lt;= 0.30)
+);
+
+CREATE TABLE professional_services (
+  id INTEGER PRIMARY KEY,
+  provider_id INTEGER NOT NULL REFERENCES parishioners(id),
+  service_category TEXT NOT NULL,
+  service_description TEXT NOT NULL,
+  recipient_id INTEGER REFERENCES parishioners(id),      -- null = parish itself
+  recipient_witness_id INTEGER REFERENCES parishioners(id),
+  market_rate_dollars_per_hour REAL NOT NULL,
+  hours REAL NOT NULL,
+  market_value_dollars REAL NOT NULL,                    -- hours × rate
+  walkaway_fraction REAL NOT NULL,                       -- 0.00 to 0.30
+  credit_dollars_to_provider REAL NOT NULL,              -- market_value × walkaway
+  net_value_to_caisse REAL NOT NULL,                     -- market_value - credit
+  performed_on DATE NOT NULL,
+  attested_on DATETIME NOT NULL,
+  irs_receipt_issued BOOLEAN DEFAULT 0,
+  video_id INTEGER REFERENCES videos(id),
+  CHECK (walkaway_fraction &gt;= 0.0 AND walkaway_fraction &lt;= 0.30),
+  CHECK (provider_id != recipient_id OR recipient_id IS NULL)
+);
+</code></pre>
+<h3 id="4-donations-lane-2-the-dollar-donor-side">4. Donations (lane 2: the dollar-donor side)</h3>
+<pre><code class="language-sql">CREATE TABLE donations (
+  id INTEGER PRIMARY KEY,
+  donor_ref TEXT,
+  amount_dollars REAL NOT NULL,
+  sponsored_parishioner_id INTEGER,
+  received_on DATE NOT NULL,
+  receipt_issued BOOLEAN DEFAULT 0
+);
+</code></pre>
+<h3 id="5-certified-purchases-lane-1">5. Certified purchases (lane 1)</h3>
+<pre><code class="language-sql">CREATE TABLE certified_purchases (
+  id INTEGER PRIMARY KEY,
+  parishioner_id INTEGER NOT NULL REFERENCES parishioners(id),
+  item_id TEXT NOT NULL,
+  retail_paid_dollars REAL NOT NULL,       -- what the parishioner paid
+  actual_cost_dollars REAL,                -- what the caisse paid the vendor
+  spread_to_fund REAL,                     -- retail - actual
+  vendor_order_ref TEXT,
+  ordered_on DATETIME NOT NULL,
+  fulfilled_on DATETIME
+);
+</code></pre>
+<h3 id="6-redemptions-spend-lane-tokens-or-credit-or-mixed">6. Redemptions (spend lane: tokens or credit or mixed)</h3>
+<pre><code class="language-sql">CREATE TABLE redemptions (
+  id INTEGER PRIMARY KEY,
+  parishioner_id INTEGER NOT NULL REFERENCES parishioners(id),
+  item_id TEXT NOT NULL,
+  tokens_spent REAL NOT NULL DEFAULT 0,
+  credit_dollars_spent REAL NOT NULL DEFAULT 0,
+  dollars_spent REAL NOT NULL DEFAULT 0,
+  requested_on DATETIME NOT NULL,
+  approved_on DATETIME,
+  approved_by INTEGER REFERENCES parishioners(id),
+  vendor_order_ref TEXT,
+  vendor_dollars_paid REAL,
+  fulfilled_on DATETIME
+);
+</code></pre>
+<h3 id="7-transfers-token-or-credit-gifts-within-family-or-back-to-parish">7. Transfers (token or credit gifts within family or back to parish)</h3>
+<pre><code class="language-sql">CREATE TABLE transfers (
+  id INTEGER PRIMARY KEY,
+  from_parishioner_id INTEGER NOT NULL REFERENCES parishioners(id),
+  to_parishioner_id INTEGER,               -- null = returned to parish pool
+  tokens REAL DEFAULT 0,
+  credit_dollars REAL DEFAULT 0,
+  reason TEXT,
+  transferred_on DATETIME NOT NULL
+);
+</code></pre>
+<h3 id="8-videos-lane-3-the-paix-witness-capture-layer">8. Videos (lane 3: the PAIX Witness capture layer)</h3>
+<pre><code class="language-sql">CREATE TABLE videos (
+  id INTEGER PRIMARY KEY,
+  raw_upload_id TEXT,                      -- local file ref or storage URL
+  youtube_video_id TEXT,
+  x_post_id TEXT,
+  meta_ig_reel_id TEXT,
+  meta_fb_reel_id TEXT,
+  privacy TEXT NOT NULL DEFAULT 'unlisted',-- unlisted | public
+  doer_face_visible BOOLEAN DEFAULT 1,
+  beneficiary_face_visible BOOLEAN DEFAULT 0,
+  beneficiary_consent_given BOOLEAN DEFAULT 0,
+  monetization_consent_given BOOLEAN DEFAULT 0,
+  minor_present BOOLEAN DEFAULT 0,
+  guardian_consent_given BOOLEAN DEFAULT 0,
+  auto_review_passed BOOLEAN,
+  steward_review_status TEXT DEFAULT 'pending', -- pending | approved | rejected
+  steward_review_by INTEGER REFERENCES parishioners(id),
+  captured_on DATETIME NOT NULL,
+  published_on DATETIME
+);
+</code></pre>
+<h3 id="9-platform-revenue-lane-3-the-money-side">9. Platform revenue (lane 3: the money side)</h3>
+<pre><code class="language-sql">CREATE TABLE platform_revenue (
+  id INTEGER PRIMARY KEY,
+  platform TEXT NOT NULL,                  -- 'youtube' | 'x' | 'meta_ig' | 'meta_fb' | 'other'
+  period_start DATE NOT NULL,
+  period_end DATE NOT NULL,
+  gross_revenue_dollars REAL NOT NULL,
+  platform_fee_dollars REAL DEFAULT 0,
+  net_to_caisse_dollars REAL NOT NULL,
+  import_source TEXT,                      -- 'youtube_adsense_csv', 'x_creator_report', etc.
+  imported_on DATETIME NOT NULL
+);
+</code></pre>
+<h2 id="views-for-the-dashboard">Views for the dashboard</h2>
+<pre><code class="language-sql">-- Token velocity (median days earned → spent)
+CREATE VIEW v_token_velocity AS
+  SELECT r.parishioner_id,
+         julianday(r.approved_on) - julianday(d.attested_on) AS days_to_spend
+  FROM redemptions r JOIN deeds d ON d.earner_id = r.parishioner_id
+  WHERE r.approved_on IS NOT NULL AND r.tokens_spent &gt; 0;
+
+-- Fund solvency (four-lane accounting)
+CREATE VIEW v_solvency AS
+  SELECT
+    (SELECT COALESCE(SUM(amount_dollars),0) FROM donations)
+    + (SELECT COALESCE(SUM(spread_to_fund),0) FROM certified_purchases)
+    + (SELECT COALESCE(SUM(net_to_caisse_dollars),0) FROM platform_revenue)
+    - (SELECT COALESCE(SUM(vendor_dollars_paid),0) FROM redemptions)
+    AS fund_dollars,
+    (SELECT COALESCE(SUM(hours),0) FROM deeds)
+    - (SELECT COALESCE(SUM(tokens_spent),0) FROM redemptions)
+    AS outstanding_tokens,
+    (SELECT COALESCE(SUM(credit_dollars_to_provider),0) FROM professional_services)
+    - (SELECT COALESCE(SUM(credit_dollars_spent),0) FROM redemptions)
+    AS outstanding_credit_dollars;
+
+-- Procurement spread (lane 1)
+CREATE VIEW v_spread AS
+  SELECT SUM(retail_paid_dollars) AS retail_delivered,
+         SUM(actual_cost_dollars) AS actual_paid,
+         SUM(spread_to_fund) AS spread_captured
+  FROM certified_purchases
+  WHERE fulfilled_on IS NOT NULL;
+
+-- Deed diversity (trailing 90 days)
+CREATE VIEW v_diversity AS
+  SELECT COUNT(DISTINCT earner_id) AS distinct_earners
+  FROM deeds WHERE performed_on &gt;= date('now','-90 days');
+
+-- Household participation (trailing 90 days)
+CREATE VIEW v_participation AS
+  SELECT
+    COUNT(DISTINCT parishioner_id) AS households_shopping,
+    (SELECT COUNT(*) FROM parishioners WHERE status='certified') AS households_certified
+  FROM certified_purchases
+  WHERE ordered_on &gt;= datetime('now','-90 days');
+
+-- Video coverage (trailing quarter)
+CREATE VIEW v_video_coverage AS
+  SELECT
+    COUNT(*) AS deed_count,
+    COUNT(video_id) AS deeds_with_video
+  FROM deeds
+  WHERE performed_on &gt;= date('now','-90 days');
+
+-- PAIX Witness revenue (trailing quarter, by platform)
+CREATE VIEW v_paix_witness_revenue AS
+  SELECT platform, SUM(net_to_caisse_dollars) AS revenue
+  FROM platform_revenue
+  WHERE period_end &gt;= date('now','-90 days')
+  GROUP BY platform;
+
+-- Professional services (trailing quarter)
+CREATE VIEW v_prof_services AS
+  SELECT
+    service_category,
+    COUNT(DISTINCT provider_id) AS providers,
+    SUM(market_value_dollars) AS market_value,
+    SUM(credit_dollars_to_provider) AS credit_issued,
+    SUM(net_value_to_caisse) AS net_to_caisse,
+    AVG(walkaway_fraction) AS avg_walkaway
+  FROM professional_services
+  WHERE performed_on &gt;= date('now','-90 days')
+  GROUP BY service_category;
+</code></pre>
+<h2 id="certification-the-auto-approval-algorithm">Certification: the auto-approval algorithm</h2>
+<p>The steward's nightly queue should be a <strong>3-minute review, not a 30-minute one</strong>. The algorithm handles 95% of signups; the steward reviews the flagged 5%.</p>
+<p><strong>Auto-approval rules</strong> (all must pass to auto-approve):</p>
+<ol>
+<li>Phone number is not blacklisted.</li>
+<li>Phone number is not already associated with another <code>certified</code> account (prevents double-signup).</li>
+<li><code>display_name</code> non-empty and &gt; 2 characters.</li>
+<li><code>claimed_parish</code> either empty OR matches a known-parish string in <code>data/known_parishes.json</code>.</li>
+<li>Signup rate from this phone number's area code in the last 24h is below threshold (spam protection).</li>
+</ol>
+<p>If all pass → auto-approve, generate code, send welcome SMS. If any fail → flag for steward review with reason.</p>
+<p><strong>Flag reasons</strong> (surfaced in steward queue):
+- <code>AMBIGUOUS_PARISH</code>: claimed_parish doesn't match known list — verify by phone call.
+- <code>HIGH_VOLUME_AREA_CODE</code>: possible spam wave — verify.
+- <code>DUPLICATE_PHONE</code>: phone matches an existing account — merge or decline.
+- <code>NAME_TOO_SHORT</code>: display_name &lt; 3 chars — request full name.</p>
+<p>Steward buttons on flagged rows: ✓ Approve · ? Follow-up · ✕ Decline.</p>
+<h2 id="video-review-the-second-auto-approval-loop">Video review: the second auto-approval loop</h2>
+<p>Video uploads run through an automated check before publication. Auto-review rules:</p>
+<ol>
+<li><strong>Face count ≥ 2</strong> in first 3 seconds (doer + witness or doer + beneficiary).</li>
+<li><strong>Audio detected</strong> and contains a witness line via speech-to-text (regex: <code>witness|attest|saw|swear|received</code>).</li>
+<li><strong>No visible minors</strong> OR <code>guardian_consent_given = 1</code>.</li>
+<li><strong>File size and duration within bounds</strong> (20–120 seconds, ≤ 500MB).</li>
+</ol>
+<p>If all pass → <code>auto_review_passed = 1</code>; steward can approve for public in one click. If any fail → <code>auto_review_passed = 0</code>; steward reviews manually and either approves as unlisted-only, requests re-record, or rejects.</p>
+<h2 id="the-v1-order-flow-manual-on-purpose">The v1 order flow (manual, on purpose)</h2>
+<p>For the first hundred transactions, the steward places every Amazon order by hand. This is not a limitation; it is a <strong>feature</strong> — it forces human eyes on every redemption while trust is being built, exactly the way your grandfather's caisse would have handled every loan in its first year.</p>
+<p>Flow:</p>
+<ol>
+<li><strong>Parishioner</strong> logs into shop, browses catalog, clicks "Request" on an item. Chooses payment mode: tokens, credit, dollars, or mix. Ledger checks balances; sufficient balances placed in escrow.</li>
+<li><strong>Steward</strong> receives an email: <code>"M.T.-1 requests grocery-week-family4 (6† or $90). Balance after: 12†. Fund cash after: $8,142."</code></li>
+<li><strong>Steward</strong> clicks approve. Redemption row is written. Tokens/credit debited from escrow to spent.</li>
+<li><strong>Steward</strong> manually places the order on the parish Amazon Business account.</li>
+<li><strong>Steward</strong> pastes the Amazon order ID and actual dollars charged. Row updated. Fund cash debited.</li>
+<li><strong>Nightly cron</strong> recomputes <code>public/ledger.json</code>. Metrics tick.</li>
+</ol>
+<p>At transaction #100, we evaluate whether to wire the <a href="https://developer-docs.amazon.com/amazon-business/">Amazon Business API</a> for automated ordering. Not before.</p>
+<h2 id="the-vendor-abstraction">The vendor abstraction</h2>
+<p>Every <code>vendors/*.js</code> file exports the same interface:</p>
+<pre><code class="language-js">export async function placeOrder({ itemId, shipTo, tokens, expectedDollars }) {
+  // returns { vendor_order_ref, actual_dollars, tracking_url? }
+}
+
+export async function verifyCovenantSigned() {
+  // returns { signed_on, signatory, terms_version } or null
+}
+</code></pre>
+<p>When a local grocer signs the parish covenant, we drop a <code>vendors/local_grocer_lenexa.js</code> implementing that interface, flip the <code>preferred_vendor</code> on the relevant catalog items, and no other code changes. <strong>The parishioner sees the same shop; the money flows to a neighbor instead of Seattle.</strong></p>
+<h2 id="the-platform-abstraction-paix-witness-lane">The platform abstraction (PAIX Witness lane)</h2>
+<p>Every <code>platforms/*.js</code> file exports the same interface:</p>
+<pre><code class="language-js">export async function uploadVideo({ filePath, metadata, privacy }) {
+  // returns { platform_video_id, url }
+}
+
+export async function fetchMonthlyRevenue({ month }) {
+  // returns { gross, fees, net, period_start, period_end }
+}
+</code></pre>
+<p>Currently: <code>youtube.js</code> (primary, <a href="https://developers.google.com/youtube/v3">YouTube Data API</a>), <code>x.js</code> (<a href="https://developer.x.com/en/docs">X API v2</a>), <code>meta.js</code> (<a href="https://developers.facebook.com/docs/graph-api">Meta Graph API</a>). Adding a platform is one file plus a config entry.</p>
+<h2 id="hosting">Hosting</h2>
+<ul>
+<li><strong>Public shop + dashboard + deed wall</strong>: GitHub Pages (free, publicly auditable, matches the user's <code>publish-to-github-pages</code> posture).</li>
+<li><strong>Steward pages</strong>: same repo, gated by parish-issued auth (Auth0 free tier, or GitHub OAuth restricted to steward team).</li>
+<li><strong>Database</strong>: SQLite on a small always-on host (Fly.io free tier or $5/mo VPS), with nightly encrypted backups to the parish's Google Drive.</li>
+<li><strong>Nightly cron</strong>: GitHub Actions calling the host's <code>/recompute</code> endpoint.</li>
+<li><strong>Monthly revenue import</strong>: GitHub Actions running <code>scripts/import_revenue.js</code> on the 1st.</li>
+<li><strong>Video source of truth</strong>: YouTube (unlisted archive), with lightweight local metadata in <code>videos</code> table.</li>
+</ul>
+<h2 id="deliberate-non-features">Deliberate non-features</h2>
+<ul>
+<li><strong>No parishioner-facing balances page.</strong> A parishioner sees their balance only after signing in with the steward present in v1. Prevents public shaming, comparison, or coercion.</li>
+<li><strong>No leaderboard.</strong> Ever.</li>
+<li><strong>No push notifications, no gamification.</strong> The caisse is not a platform.</li>
+<li><strong>No AI in the loop that touches attestation.</strong> Deeds and services are attested by human witnesses. Algorithms only <em>flag</em> for steward review; they never <em>credit</em> on their own.</li>
+<li><strong>No public beneficiary faces without explicit double opt-in.</strong></li>
+</ul>
+<h2 id="what-is-buildable-this-week">What is buildable this week</h2>
+<p>The whole v1, honestly:</p>
+<ul>
+<li><strong>Day 1:</strong> Fork storage shop, populate <code>shop.config.json</code> with 50 seed items, register YouTube/X/Meta accounts under <code>@paixwitness</code> handles.</li>
+<li><strong>Day 2:</strong> SQLite schema (9 tables), seed with test data.</li>
+<li><strong>Day 3:</strong> Public shop pages + steward queue/attest/approve/order pages.</li>
+<li><strong>Day 4:</strong> Certification flow (public signup + SMS + steward auto-approval algorithm) + video capture flow (browser recorder + auto-review).</li>
+<li><strong>Day 5:</strong> PAIX Witness cross-post pipeline (YouTube upload → X post → Meta post) + attribution links back to shop.</li>
+<li><strong>Day 6:</strong> Nightly recompute + dashboard + Public Deed Wall.</li>
+<li><strong>Day 7:</strong> Deploy to GitHub Pages + Fly.io. Frame the charter. Post it on the parish hall wall.</li>
+</ul>
+<p>By day 8, the caisse is a real institution with a public ledger URL and a public deed wall you can hand to a Grand Knight.</p>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><em>The Fathers' work, continued. Vivat Jesus.</em></p>
+    <p>One good deed. One witness. One hour. One token.</p>
+  </div>
+</footer>
+</body>
+</html>

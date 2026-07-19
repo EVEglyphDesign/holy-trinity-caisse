@@ -1,0 +1,373 @@
+{
+  "caisse": {
+    "name": "Holy Trinity Caisse",
+    "parish": "Holy Trinity Catholic Church",
+    "location": "Lenexa, KS",
+    "steward_email": "caisse@holytrinity.example.org",
+    "chartered_on": null,
+    "token_symbol": "†",
+    "token_name_singular": "token",
+    "token_name_plural": "tokens",
+    "governance_umbrella": "PAIX",
+    "public_dashboard_url": "https://caisse.holytrinity.example.org/ledger",
+    "charter_url": "https://caisse.holytrinity.example.org/charter",
+    "shop_url": "https://shop.holytrinitycaisse.example.org"
+  },
+  "certification": {
+    "gate_type": "phone_number_plus_human_review",
+    "signup_fields": ["phone", "display_name", "claimed_parish_optional"],
+    "human_review_sla_hours": 24,
+    "auto_decisions_allowed": ["approve_if_on_parish_roll", "hold_for_review"],
+    "auto_decline_ever": false,
+    "code_format": "PARISH-####-SURNAME",
+    "code_example": "HT-4291-KANE",
+    "code_expires": false,
+    "code_recoverable_by_phone": true,
+    "notify_on_certified": "sms",
+    "notify_on_flagged": "sms",
+    "certification_is_a_welcome_not_an_interview": true
+  },
+  "policies": {
+    "single_visible_retail_price": true,
+    "no_visible_discount_for_certified": true,
+    "spread_flows_to_fund_on_every_purchase": true,
+    "payment_modes_accepted": ["dollars", "tokens", "credit", "mixed"],
+    "tokens_expire": false,
+    "tokens_transferable_within_family": true,
+    "tokens_transferable_to_parish": true,
+    "tokens_tradable_openly": false,
+    "credit_expires": false,
+    "credit_transferable_within_family": true,
+    "credit_transferable_to_parish": true,
+    "credit_tradable_openly": false,
+    "attestation_required": "one_witness",
+    "self_attestation_permitted": false,
+    "hour_equals_one_token": true,
+    "fractional_tokens_allowed": true,
+    "minimum_fractional_unit": 0.25,
+    "token_dollar_equivalence_for_pricing": 15.00,
+    "token_dollar_equivalence_note": "Used only to derive default price_tokens from price_retail_visible; not a redemption rate."
+  },
+  "professional_services_policy": {
+    "enabled": true,
+    "walkaway_bands": [0.00, 0.10, 0.20, 0.30],
+    "walkaway_max": 0.30,
+    "walkaway_default": 0.20,
+    "walkaway_choice": "per_service_by_provider",
+    "walkaway_rationale": "Aligns with combined federal + Kansas state marginal tax rate for middle-class professionals (~27%). Cap set at 30% for defensibility. Bounded band prevents ad-hoc rate negotiation.",
+    "legal_counsel_signoff_required_before_launch": true,
+    "legal_counsel_note": "Have Kansas jurisdiction tax counsel or Knights of Columbus legal counsel bless (a) the discretionary-charitable-disbursement framing, (b) the specific walkaway cap, (c) the IRS receipt language, and (d) the credential-verification requirement before pilot launch.",
+    "credential_verification_required": true,
+    "witness_required": "recipient_or_steward",
+    "video_capture_encouraged": true,
+    "service_categories": [
+      "legal", "accounting", "medical", "dental",
+      "trades", "education", "therapy", "translation",
+      "technology", "design", "other"
+    ],
+    "irs_receipt_template": "Parish acknowledges receipt of pro-bono professional service; separate discretionary charitable disbursement of caisse credit is documented on internal ledger and is not itself claimed as a tax deduction by the provider."
+  },
+  "video_evidence_policy": {
+    "enabled": true,
+    "default_privacy": "unlisted",
+    "public_requires": "double_opt_in_doer_and_beneficiary",
+    "minor_requires": "guardian_consent_verbal_line_in_clip",
+    "auto_blur_beneficiary_if_no_consent": true,
+    "two_face_rule": true,
+    "verbal_witness_line_required": true,
+    "monetization_consent_line_required_for_public": true,
+    "clip_duration_seconds_min": 20,
+    "clip_duration_seconds_max": 120,
+    "what_is_never_on_video": [
+      "financial_coercion_or_debt_relief_moments",
+      "medical_or_hygiene_intimacy",
+      "minors_without_guardian_consent_line",
+      "beneficiary_in_visible_economic_distress_without_face_blur",
+      "any_deed_where_beneficiary_declines_capture"
+    ]
+  },
+  "monetization_policy": {
+    "revenue_recipient": "caisse_fund",
+    "revenue_recipient_note": "100% of platform revenue flows to the caisse fund. Not to parishioners featured in clips. Not to videographers. Not to stewards. Not to PAIX overhead. Chartered by Article V of the Charter.",
+    "attribution_link_on_all_public_clips": "https://shop.holytrinitycaisse.example.org",
+    "attribution_link_placement": ["description", "end_card"],
+    "platforms": [
+      {
+        "key": "youtube",
+        "handle": "@paixwitness",
+        "role": "primary_archive_and_long_form",
+        "monetized": false,
+        "partner_program_thresholds": "1000 subs + 4000 watch hours OR 10M Shorts views in 90d",
+        "revenue_streams": ["ad_revenue", "channel_memberships", "super_thanks"]
+      },
+      {
+        "key": "x",
+        "handle": "@paixwitness",
+        "role": "institutional_catholic_propagation",
+        "monetized": false,
+        "revenue_streams": ["creator_revenue_sharing"]
+      },
+      {
+        "key": "meta_ig",
+        "handle": "@paixwitness",
+        "role": "family_graph_propagation",
+        "monetized": false,
+        "revenue_streams": ["reels_bonus", "content_monetization"]
+      },
+      {
+        "key": "meta_fb",
+        "handle": "paixwitness",
+        "role": "older_parishioner_reach",
+        "monetized": false,
+        "revenue_streams": ["content_monetization"]
+      }
+    ]
+  },
+  "categories": [
+    "food",
+    "hygiene",
+    "school",
+    "transport",
+    "tools",
+    "medicine",
+    "clothing",
+    "utilities",
+    "childcare",
+    "eldercare",
+    "household",
+    "office"
+  ],
+  "catalog": [
+    {
+      "id": "grocery-week-family4",
+      "title": "Family grocery box — one week (family of 4)",
+      "category": "food",
+      "price_retail_visible": 90.00,
+      "price_tokens_equivalent": 6,
+      "cost_internal_estimate": 76.50,
+      "spread_to_fund_estimate": 13.50,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:family-grocery-week-v1",
+        "ship_mode": "parishioner_home_or_parish_pickup",
+        "local_replacement_target": "local_grocer"
+      }
+    },
+    {
+      "id": "grocery-week-family2",
+      "title": "Grocery box — one week (family of 2)",
+      "category": "food",
+      "price_retail_visible": 60.00,
+      "price_tokens_equivalent": 4,
+      "cost_internal_estimate": 51.00,
+      "spread_to_fund_estimate": 9.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:family-grocery-week-v1-half",
+        "ship_mode": "parishioner_home_or_parish_pickup",
+        "local_replacement_target": "local_grocer"
+      }
+    },
+    {
+      "id": "diapers-size3-monthly",
+      "title": "Diapers — one month supply (size 3)",
+      "category": "childcare",
+      "price_retail_visible": 48.00,
+      "price_tokens_equivalent": 3,
+      "cost_internal_estimate": 38.00,
+      "spread_to_fund_estimate": 10.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "amazon_business:diaper_program",
+        "ship_mode": "parishioner_home",
+        "local_replacement_target": null
+      },
+      "notes": "Eligible for Amazon Business nonprofit diaper/wipes/formula price-ceiling program."
+    },
+    {
+      "id": "formula-monthly",
+      "title": "Infant formula — one month supply",
+      "category": "childcare",
+      "price_retail_visible": 130.00,
+      "price_tokens_equivalent": 9,
+      "cost_internal_estimate": 102.00,
+      "spread_to_fund_estimate": 28.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "amazon_business:formula_program",
+        "ship_mode": "parishioner_home",
+        "local_replacement_target": null
+      }
+    },
+    {
+      "id": "gas-tank-standard",
+      "title": "Fill a standard gas tank (up to 15 gal)",
+      "category": "transport",
+      "price_retail_visible": 55.00,
+      "price_tokens_equivalent": 4,
+      "cost_internal_estimate": 55.00,
+      "spread_to_fund_estimate": 0.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "voucher_local_station",
+        "vendor_ref": "shell_lenexa_87th",
+        "ship_mode": "voucher_code_to_parishioner",
+        "local_replacement_target": null
+      },
+      "notes": "No procurement spread on voucher-based items; spread comes from covenant-signing local merchant contributions instead."
+    },
+    {
+      "id": "bus-pass-monthly",
+      "title": "Monthly transit pass (KCATA)",
+      "category": "transport",
+      "price_retail_visible": 50.00,
+      "price_tokens_equivalent": 3,
+      "cost_internal_estimate": 50.00,
+      "spread_to_fund_estimate": 0.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "voucher_kcata",
+        "vendor_ref": "kcata_monthly_pass",
+        "ship_mode": "voucher_code_to_parishioner",
+        "local_replacement_target": null
+      }
+    },
+    {
+      "id": "school-supply-kit-elementary",
+      "title": "Elementary school supply kit (grades K–5)",
+      "category": "school",
+      "price_retail_visible": 42.00,
+      "price_tokens_equivalent": 3,
+      "cost_internal_estimate": 33.50,
+      "spread_to_fund_estimate": 8.50,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:school-supplies-elementary-v1",
+        "ship_mode": "parish_pickup_bulk",
+        "local_replacement_target": null
+      }
+    },
+    {
+      "id": "winter-coat-child",
+      "title": "Winter coat — child",
+      "category": "clothing",
+      "price_retail_visible": 55.00,
+      "price_tokens_equivalent": 4,
+      "cost_internal_estimate": 44.00,
+      "spread_to_fund_estimate": 11.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:winter-coats-child-v1",
+        "ship_mode": "parishioner_home_or_parish_pickup",
+        "local_replacement_target": null
+      }
+    },
+    {
+      "id": "otc-medicine-kit",
+      "title": "Household OTC medicine kit (fever, cough, first-aid)",
+      "category": "medicine",
+      "price_retail_visible": 35.00,
+      "price_tokens_equivalent": 2,
+      "cost_internal_estimate": 27.00,
+      "spread_to_fund_estimate": 8.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:otc-medicine-kit-v1",
+        "ship_mode": "parishioner_home",
+        "local_replacement_target": "local_pharmacy"
+      }
+    },
+    {
+      "id": "tool-basic-repair-kit",
+      "title": "Basic home repair tool kit",
+      "category": "tools",
+      "price_retail_visible": 40.00,
+      "price_tokens_equivalent": 3,
+      "cost_internal_estimate": 32.00,
+      "spread_to_fund_estimate": 8.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:tool-basic-v1",
+        "ship_mode": "parishioner_home_or_parish_pickup",
+        "local_replacement_target": "local_hardware"
+      }
+    },
+    {
+      "id": "laundry-detergent-large",
+      "title": "Laundry detergent — large (household)",
+      "category": "household",
+      "price_retail_visible": 22.00,
+      "price_tokens_equivalent": 2,
+      "cost_internal_estimate": 17.60,
+      "spread_to_fund_estimate": 4.40,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:household-consumables-v1",
+        "ship_mode": "parishioner_home",
+        "local_replacement_target": "local_grocer"
+      }
+    },
+    {
+      "id": "paper-goods-monthly",
+      "title": "Paper goods (toilet paper, paper towels) — one month",
+      "category": "household",
+      "price_retail_visible": 45.00,
+      "price_tokens_equivalent": 3,
+      "cost_internal_estimate": 36.00,
+      "spread_to_fund_estimate": 9.00,
+      "payment_modes_accepted": ["dollars", "tokens", "mixed"],
+      "fulfillment": {
+        "preferred_vendor": "amazon",
+        "vendor_ref": "list:household-consumables-v1",
+        "ship_mode": "parishioner_home",
+        "local_replacement_target": "local_grocer"
+      }
+    }
+  ],
+  "vendors": {
+    "amazon": {
+      "type": "amazon_business",
+      "account_id": "PENDING_SETUP",
+      "atep_enrolled": false,
+      "prime_tier": "small_nonprofit_target",
+      "omnia_linked": false,
+      "rebate_tier": null,
+      "credit_line_dollars": null,
+      "account_executive_assigned": false
+    },
+    "voucher_local_station": {
+      "type": "prepaid_voucher",
+      "issuer": "TBD_local_gas_station",
+      "covenant_signed_on": null
+    },
+    "voucher_kcata": {
+      "type": "prepaid_voucher",
+      "issuer": "Kansas City Area Transportation Authority",
+      "covenant_signed_on": null
+    },
+    "local_grocer": {
+      "type": "local_merchant",
+      "covenant_signed_on": null,
+      "notes": "Target local grocer for first Amazon replacement after pilot phase."
+    },
+    "local_pharmacy": {
+      "type": "local_merchant",
+      "covenant_signed_on": null
+    },
+    "local_hardware": {
+      "type": "local_merchant",
+      "covenant_signed_on": null
+    }
+  },
+  "schema_version": "1.2.0-draft",
+  "schema_notes": "1.2.0 adds professional_services_policy (four-lane fund lane 4), video_evidence_policy (PAIX Witness capture rules), and monetization_policy (PAIX Witness lane 3 platforms). Payment modes now include 'credit' alongside dollars and tokens. All monetization revenue flows to the caisse fund per Charter Article V."
+}

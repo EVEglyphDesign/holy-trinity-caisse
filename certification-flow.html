@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certification & Enrollment Flow — Holy Trinity Caisse</title>
+<meta name="description" content="The Holy Trinity Caisse — a parish-scale mutual-aid economy under the umbrella of PAIX.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="brand">
+      <a href="index.html" class="brand-title">Holy Trinity <span>Caisse</span></a>
+      <span class="brand-tag">A parish mutual-aid economy · under PAIX</span>
+    </div>
+  </div>
+</header>
+<nav class="site">
+  <div class="wrap">
+    <a href="index.html">Home</a>
+    <a href="charter.html">Charter</a>
+    <a href="history.html">Two Fathers</a>
+    <a href="economic-model.html">Economic Model</a>
+    <a href="knights-letter.html">Knights Letter</a>
+    <a href="packet.html">Full Packet</a>
+  </div>
+</nav>
+<main>
+  <div class="wrap">
+    <h1 id="certification-enrollment-flow-holy-trinity-caisse">Certification &amp; Enrollment Flow — Holy Trinity Caisse</h1>
+<p><em>The Knights build the engine. Every working group of the parish uses it. The ledger, in time, will show who is doing the most.</em></p>
+<p>The Knights of Columbus build the caisse's operational spine — the certification queue, the auto-approval algorithm, the steward's nightly review, the professional-services enrollment desk. Once the spine is built, <strong>every working group of the parish can contribute what it has to contribute</strong>:</p>
+<ul>
+<li>The <strong>Knights</strong> contribute the engine itself, and the ongoing witness work.</li>
+<li>The <strong>education and formation groups</strong> — catechists, teachers, tutors, youth ministers, sacramental-prep leaders — contribute hours of learning, attested by a fellow group member.</li>
+<li>The <strong>social-development groups</strong> — St. Vincent de Paul conferences, hospitality committees, bereavement teams, welcome ministries, elder-care volunteers — contribute hours of accompaniment, hospitality, and care.</li>
+<li>The <strong>healthcare professionals</strong> — physicians, dentists, nurses, therapists, and allied health — contribute hours of their trade at market rate, choosing their own walk-away fraction.</li>
+<li>The <strong>trades and legal-and-financial professionals</strong> — plumbers, electricians, contractors, attorneys, CPAs, translators, IT — contribute the same way.</li>
+<li>The <strong>young parishioners</strong> contribute hours of service attested by a teacher, coach, or ministry lead — credited to their household's balance.</li>
+<li>The <strong>elders</strong> contribute by witnessing — signing deeds, blessing the ledger with their names, and offering their long-held trades as they always have.</li>
+</ul>
+<p>Every working group's hour is one hour, and every group's contribution is on the same ledger. This document describes how any parishioner — with a phone number and a name — walks through the door.</p>
+<p>The caisse does not sort parishioners into categories the wider world uses. It sorts by <strong>what a parishioner brings</strong> — an hour of driving, an hour of tutoring, an hour of the trade they were trained in, an hour of witnessing another's hour. The dashboard's ninth metric will, over time, show which working groups are carrying the caisse. That answer is the ledger's to give, not this document's to guess.</p>
+<h2 id="part-1-the-parishioners-side-30-seconds">Part 1 — The parishioner's side (30 seconds)</h2>
+<p><strong>The certification page:</strong> <code>shop.holytrinitycaisse.example.org/certify</code></p>
+<p>Single form, three fields:</p>
+<pre><code>[ Your name ]
+[ Your phone number ]
+[ The parish you belong to — start typing ]
+</code></pre>
+<p>Below the form, one line:</p>
+<blockquote>
+<p><em>By clicking Request Certification, you consent to receive one SMS from the caisse steward's queue. The parish will confirm you against its roll and welcome you into the shop, usually within one day.</em></p>
+</blockquote>
+<p>One button: <strong>Request Certification.</strong></p>
+<p>That is the entire parishioner-facing certification UX. No email. No password. No verification code (yet). No terms-of-service scroll. No cookie banner beyond what the law requires. <strong>The parish is not Amazon; it does not need to know more about a soul than her name, her number, and the parish she belongs to.</strong></p>
+<p>Behind that click, the system:</p>
+<ol>
+<li>Inserts a row into <code>parishioners</code> with <code>status = 'pending'</code>, <code>joined_on = today</code>.</li>
+<li>Runs the five auto-approval checks (§ Part 3 below).</li>
+<li>If all pass — auto-approves; generates the code (<code>HT-XXXX-NAME</code>); sends the welcome SMS immediately.</li>
+<li>If any fail — flags for the steward's morning queue with the flag reason attached to the row.</li>
+</ol>
+<p>The parishioner sees, on the confirmation screen:</p>
+<blockquote>
+<p><em>Welcome. If you were auto-approved, your code is on its way by text now. Otherwise, a steward will call you within a day to confirm.</em></p>
+</blockquote>
+<h2 id="part-2-the-stewards-nightly-queue-3-minutes">Part 2 — The steward's nightly queue (3 minutes)</h2>
+<p><strong>The steward page:</strong> <code>shop.holytrinitycaisse.example.org/steward/queue</code> (auth-gated)</p>
+<p>The queue is meant to be reviewed once a day, at whatever hour suits the steward — typically after dinner, before the ledger's nightly recompute at 23:00 CT. It is intentionally a <strong>3-minute review, not a 30-minute one.</strong></p>
+<p>The queue view lists only flagged rows. Each row shows:</p>
+<pre><code>Marie-Therese Kane · (913) 555-0142 · Holy Trinity, Lenexa
+Joined: 2026-07-19 · Flag: AMBIGUOUS_PARISH — &quot;Holy Trinity&quot; (12 US parishes carry this name)
+[ ✓ Approve ]   [ ? Follow-up ]   [ ✕ Decline ]
+</code></pre>
+<p>Auto-approved rows do <strong>not</strong> appear in the queue. They appear only in the daily digest email the steward receives at 07:00 CT:</p>
+<blockquote>
+<p><em>Overnight the caisse auto-approved 6 parishioners: Kane, Landry, Boucher, Comeau, Doucet, LeBlanc. Certification code registry is at [link].</em></p>
+<p><em>Flagged for your review this morning: 2. Queue: [link].</em></p>
+</blockquote>
+<p><strong>The 3-minute discipline:</strong> Auto-approval handles ~95% of signups; the steward reviews the ~5% flagged; the whole task fits in a coffee break.</p>
+<h2 id="part-3-the-auto-approval-algorithm">Part 3 — The auto-approval algorithm</h2>
+<p>Five checks, all must pass to auto-approve:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Check</th>
+<th>Fail flag</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Phone number is not blacklisted</td>
+<td><code>BLACKLISTED_PHONE</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Phone number is not already associated with another <code>certified</code> account</td>
+<td><code>DUPLICATE_PHONE</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>display_name</code> non-empty AND length ≥ 3 characters AND contains at least one space</td>
+<td><code>NAME_TOO_SHORT</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>claimed_parish</code> either empty OR matches a known-parish string in <code>data/known_parishes.json</code> (fuzzy match, Levenshtein ≤ 3)</td>
+<td><code>AMBIGUOUS_PARISH</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Signup rate from this phone number's area code in the last 24h is below threshold (default: 10/day/area-code)</td>
+<td><code>HIGH_VOLUME_AREA_CODE</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rows with <strong>no fail flags</strong> are auto-approved:</p>
+<pre><code class="language-sql">UPDATE parishioners
+SET status = 'certified',
+    code = format('HT-%s-%s', short_id, upper(last_name)),
+    certified_on = CURRENT_TIMESTAMP,
+    auto_approved = 1
+WHERE id = ?;
+</code></pre>
+<p>Rows with <strong>any fail flag</strong> remain <code>status = 'pending'</code>, with the flag(s) attached to <code>notes</code>.</p>
+<p><strong>The philosophy:</strong> The algorithm has one job — to remove obvious tedium from the steward's evening. It does not decide who is a Catholic, who belongs to Holy Trinity, or who is worthy. It only sorts the certain from the ambiguous, and hands the ambiguous to a human.</p>
+<h2 id="part-4-the-welcome-sms">Part 4 — The welcome SMS</h2>
+<p>Auto-approval sends immediately:</p>
+<blockquote>
+<p><em>Welcome, Marie-Therese. You are now certified with the Holy Trinity Caisse. Your shopping code is </em><em>HT-4291-KANE</em><em> — enter it at checkout on shop.holytrinitycaisse.example.org so your ordinary purchases quietly serve the fund. Save this text. Vivat Jesus.</em></p>
+</blockquote>
+<p>Steward-approval sends after the ✓ Approve click:</p>
+<blockquote>
+<p><em>Marie-Therese, this is [Steward name] from Holy Trinity. Welcome. Your shopping code is </em><em>HT-4291-KANE</em><em> — enter it at checkout on shop.holytrinitycaisse.example.org. Call the parish office if you have any question. Vivat Jesus.</em></p>
+</blockquote>
+<p>Follow-up sends after the ? Follow-up click:</p>
+<blockquote>
+<p><em>Marie-Therese, this is [Steward name] from Holy Trinity Caisse. I would like to confirm your registration by phone at your convenience. Please call the parish office at [number]. Vivat Jesus.</em></p>
+</blockquote>
+<p>Decline sends only if the steward opts to notify. Most declines (spam, duplicate, blacklist hits) are silent.</p>
+<h2 id="part-5-professional-services-enrollment-a-sub-flow">Part 5 — Professional-services enrollment (a sub-flow)</h2>
+<p>For parishioners who have a trade to offer — attorney, CPA, physician, dentist, plumber, electrician, tutor, therapist, translator, IT consultant, tradesperson, designer, and so on — there is a second, quiet enrollment step, taken separately after certification.</p>
+<p><strong>The professional's page:</strong> <code>shop.holytrinitycaisse.example.org/steward/prof_service/enroll</code> (accessible from any certified parishioner's account)</p>
+<p>Form fields:</p>
+<pre><code>Credential type ...................... [ dropdown: JD/Bar, MD, CPA, licensed trade, etc. ]
+Credential reference (bar #, license #, etc.) ... [ optional ]
+Jurisdiction .......................... [ optional ]
+Standard market rate ($/hr) ........... [ e.g. $150 ]
+Default walk-away band ................ [ radio: 0%  10%  20%  30% ]
+Notes ................................. [ e.g. &quot;willing to take 3 tax returns per year&quot; ]
+</code></pre>
+<p>Below the walk-away band selector, one line of explanation:</p>
+<blockquote>
+<p><em>You choose your own measure. Zero means the whole hour is a gift. Ten, twenty, or thirty percent means the caisse issues you credit equal to that fraction of the market rate of the service, which your household may spend at the shop. The remainder is booked as your gift to the mission. </em><em>This is your household's answer to what your household can spare.</em>**</p>
+</blockquote>
+<p><strong>The professional's page is not public.</strong> Parishioners see only the general caisse; only certified parishioners with an enrolled credential see the professional-services log.</p>
+<h3 id="the-service-log">The service log</h3>
+<p>When the professional performs a service for another parishioner, either the professional or a steward logs it:</p>
+<pre><code>Provider ........................ [ Marie-Therese Kane, CPA ]
+Service category ................ [ dropdown ]
+Service description ............. [ &quot;2026 tax return prep, Franco family&quot; ]
+Recipient ....................... [ certified parishioner OR the parish itself ]
+Witness ......................... [ recipient OR a steward ]
+Hours ........................... [ 2.0 ]
+Market rate ($/hr) .............. [ auto-filled from credential; overridable within ±20% ]
+Walk-away this service .......... [ 0%  10%  20%  30% — default from credential, overridable per service ]
+</code></pre>
+<p>The ledger computes:</p>
+<pre><code>market_value_dollars     = hours × market_rate
+credit_to_provider       = market_value × walkaway_fraction
+net_to_caisse            = market_value − credit_to_provider
+</code></pre>
+<p>An IRS receipt is generated for the provider automatically, using the language templated in <code>shop.config.json → professional_services_policy.irs_receipt_template</code>.</p>
+<h3 id="enrollment-auto-approval">Enrollment auto-approval</h3>
+<p>Professional-service enrollment is <strong>never</strong> auto-approved. Every credential must be verified by a steward (or a delegated professional-services steward, ideally a Knight who is himself an attorney or CPA) against the credential's public licensing registry — the state bar, the state board of accountancy, the state medical board, the city licensing office. This verification is one phone call or one web lookup per enrollment, done once per lifetime of the credential.</p>
+<p>The verified professional's row is stamped with <code>verified_on</code> and <code>verified_by</code>, and the professional can log services from that moment forward.</p>
+<h2 id="part-6-what-the-flow-does-not-do">Part 6 — What the flow does not do</h2>
+<p><em>Guardrails: encoded, not proclaimed.</em></p>
+<ul>
+<li>The flow does not ask about race, income, immigration status, marital status, orientation, or any category the wider world uses to sort people into rent-tiers. <strong>The parishioner is a soul, not a segment.</strong></li>
+<li>The flow does not resell, monetize, or cross-market the phone numbers it collects. There is no data broker in the loop.</li>
+<li>The flow does not accept payment for faster certification. Every parishioner waits the same short wait.</li>
+<li>The flow does not surface disputes between parishioners. If two parishioners are in disagreement over a deed, a service, or a token, the pastor and the steward hear it privately. The caisse does not adjudicate; it records.</li>
+<li>The flow does not sort professionals into tiers, ratings, reviews, or leaderboards. Every professional's hour is one hour; every professional's fee is her own conscience's answer.</li>
+<li>The flow does not host third-party ads, tracking pixels, or affiliate codes anywhere on the shop pages, the steward pages, or the deed wall. <strong>The caisse is the neighbor's page, not the market's.</strong></li>
+</ul>
+<p>These are the shape of the engine, not the slogan on its side. The caisse's posture is quiet: it does not become a rent-taker, a tax collector, an arbitrator, a decider of winners and losers, a seller of attention, or a racer of yachts. <strong>What it is not, it need not name. It is enough that it does not become those things.</strong></p>
+<h2 id="part-7-the-one-week-rollout">Part 7 — The one-week rollout</h2>
+<ul>
+<li><strong>Day 1:</strong> Steward's queue page + auto-approval algorithm live on staging.</li>
+<li><strong>Day 2:</strong> Public <code>/certify</code> page live; SMS provider configured (Twilio or a diocesan SMS vendor).</li>
+<li><strong>Day 3:</strong> Seed <code>data/known_parishes.json</code> with the diocese's parish roll.</li>
+<li><strong>Day 4:</strong> Test end-to-end: five test signups, three auto-approved, two flagged.</li>
+<li><strong>Day 5:</strong> Professional-services <code>/enroll</code> sub-flow live; five test enrollments processed by the steward.</li>
+<li><strong>Day 6:</strong> Steward-training walk-through with the pastor and the first designated Knight witness.</li>
+<li><strong>Day 7:</strong> Announcement in the parish bulletin. The engine is on. The parish drives.</li>
+</ul>
+  </div>
+</main>
+<footer class="site">
+  <div class="wrap">
+    <p><em>The Fathers' work, continued. Vivat Jesus.</em></p>
+    <p>One good deed. One witness. One hour. One token.</p>
+  </div>
+</footer>
+</body>
+</html>
