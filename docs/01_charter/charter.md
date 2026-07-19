@@ -10,7 +10,7 @@
 
 **One good deed. One witness. One hour. One token.**
 
-## The Six Articles
+## The Seven Articles
 
 **I. Of the Deed.**
 A token is minted only by an act of service freely given to another — the sick visited, the hungry fed, the ignorant taught, the stranger welcomed, the elder driven, the child watched, the grieving accompanied. No token is minted by promise, by need, or by pity. The deed is the deposit slip.
@@ -27,7 +27,10 @@ The token does not expire, for a good deed does not expire. The token may pass w
 **V. Of Certification.**
 Any parishioner in good standing may be certified by the parish and issued a code by which their ordinary purchases from the shop shall be made in the parish's name. Certification is a welcome, not an interview: the parishioner gives their name and their phone number, a steward confirms them against the parish roll, and the code is theirs. The certified parishioner sees the same retail price a stranger would see, and pays it in full, that no one may say the caisse subsidizes its own. But the stewardship spread the parish's collective standing has earned upon that purchase — the tax the state would have taken, the discount the vendor would have withheld, the rebate the vendor would have quietly pocketed — is thereby directed into the common fund, to the aid of those who have earned tokens by their deeds. **What the certified parishioner would have spent anyway becomes, without extra cost, an act of mercy.** There is no charity in this arrangement, only stewardship of what the wider world had already decided to concede to a Catholic parish, and which the parish now redirects to its own.
 
-**VI. Of Professional Service.**
+**VI. Of Non-Interference.**
+The caisse conducts no politics. It names no public figure in favor or against. It endorses no party. It joins no campaign. It lobbies no legislature. It petitions no office. It signs no letter of protest. Its board and its steward, acting in the caisse's name, take no partisan position on any question outside its own works. This is not because the caisse has no views — its parishioners have every view, freely held — but because the caisse is a small and quiet thing, kept for the care of neighbors, and it lasts longer when it minds its own business. The parishioner is free in his own person to hold any political opinion, to vote as his conscience directs, to serve in any office the law permits; but the caisse itself walks past the public square without stopping. **Whatever we cannot do without drawing the attention of the powers of this age, we do not do at all.**
+
+**VII. Of Professional Service.**
 A parishioner who possesses a trade, a craft, or a profession may offer its exercise as their gift to the caisse. The plumber may donate the mending of a pipe; the attorney the drafting of a will; the tutor an hour of learning; the physician a visit to the housebound; the accountant a season's tax return. Every such service is delivered to its recipient at its full market rate, and the recipient owes nothing. The parishioner-professional, in offering the service, chooses their own measure — **zero, that the gift may be whole; or a fraction, that their own household may also be provided for as they provide for another.** The caisse acknowledges the gift at its market rate, issues the professional caisse credit at their chosen fraction, and retains the balance as service rendered to the mission. **The hour of a professional is honored at its market price; the professional's walk-away is their own conscience's answer to what their household can spare.** No parishioner is paid a wage; every parishioner is provided for; and no professional's family goes hungry because they gave their trade away.
 
 ## The Five Flows
@@ -57,6 +60,8 @@ This is the whole ambition of the caisse. Not to invent. To continue.
 ## The Posture
 
 The caisse does not take rent. It does not collect tax. It does not arbitrate between parishioners, or decide who among them is the winner and who the loser. It does not sell its ledger, its attention, or its neighbors. It does not race yachts. It exists to help the people who need help, and to support the institution that founded, in its time, all the other institutions the wider world now runs.
+
+The caisse does not claim to be better than any lawful trade, office, or profession outside of it. Bankers keep the credit of the world; salespeople move its goods; brokers connect the parties who cannot find each other; the world could not function without them, and the caisse holds no grievance against any of them. The caisse's structural advantages — the parish's tax standing, the parishioners' covenanted hours, the public ledger — belong to a different kind of instrument for a different kind of work; they are not evidence that the caisse's people are better people. **The caisse is more effective, not more righteous.**
 
 What the caisse is not, it need not say aloud. It is enough that it does not become those things, and that its ledger, being public, will show that it did not.
 

@@ -20,6 +20,18 @@ Two codes. Same technology. You choose the destination.
 
 ---
 
+## Who this is for
+
+The caisse is for people who produce value in their community and want the flowback from their ordinary spending to circulate among neighbors: households buying groceries and school supplies, professionals doing real work for other households, tradespeople, teachers, healthcare workers, small-business operators, and the parishioners who volunteer their hours.
+
+The caisse is not oriented toward political actors, financial intermediaries, or sales professions. Not because there is anything wrong with any of those roles — the world needs all of them — but because our structural advantages (parish tax status, a real community, a public ledger, and covenanted volunteer hours) are useless to those roles and would only complicate their lives. We are not trying to reform them, replace them, or compete with them. We simply do a different kind of work, in a different kind of container, for a different kind of purpose.
+
+We do not name names. We do not endorse or oppose any public figure, any political party, any bank, any brokerage, or any employer. We do not lobby. We do not petition. We do not run for anything. The caisse's board and steward are forbidden by charter from any partisan political activity conducted in the caisse's name.
+
+The reason for this is practical, not moral. A parish-scale mutual-aid economy is a small, quiet thing. If it stays small and quiet, it does its work without drawing attention. If it becomes political, it draws attention, and the people it was built to serve get hurt. **The Fathers built parish structures precisely because they last longer when they mind their own business.** We are following that pattern deliberately.
+
+---
+
 ## Why this is allowed
 
 **There is no legal restriction on a non-Catholic supporting a Catholic parish or a Catholic-affiliated fund in the United States.** Catholic parishes and their 501(c)(3) affiliates are open to donations from any person, of any faith or no faith. The IRS does not impose a religion test on donors. The diocese does not either.
