@@ -59,29 +59,32 @@ CSS = """
 * { box-sizing: border-box; }
 
 html {
-  font-size: 17px;
+  font-size: 16px;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   background: var(--parchment);
   color: var(--ink);
-  font-family: 'Cormorant Garamond', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-  line-height: 1.65;
+  font-family: 'Source Serif 4', 'Charter', 'Iowan Old Style', Georgia, serif;
+  font-weight: 450;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  overflow-x: hidden;
 }
 
 header.site {
   border-bottom: 1px solid var(--rule);
   background: var(--parchment-warm);
-  padding: 1.4rem 0 1rem;
+  padding: 0.9rem 0 0.75rem;
 }
 .wrap {
-  max-width: 780px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1.1rem;
 }
 .brand {
   display: flex;
@@ -91,9 +94,10 @@ header.site {
   flex-wrap: wrap;
 }
 .brand-title {
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--ink);
   text-decoration: none;
 }
@@ -101,35 +105,40 @@ header.site {
   color: var(--accent);
 }
 .brand-tag {
-  font-size: 0.85rem;
-  font-style: italic;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
   color: var(--ink-soft);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.01em;
 }
 .pre-approval {
   background: #fdf5df;
   border-top: 1px solid #d8c992;
   border-bottom: 1px solid #d8c992;
-  color: #6b5a1a;
-  padding: 0.55rem 0;
+  color: #5a4a10;
+  padding: 0.5rem 0;
   font-size: 0.82rem;
-  letter-spacing: 0.03em;
-  text-align: center;
+  line-height: 1.4;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 450;
+  text-align: left;
 }
-.pre-approval strong { color: #4a3f10; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.75rem; }
-.pre-approval .wrap { max-width: 780px; padding: 0 1.4rem; margin: 0 auto; }
+.pre-approval strong { color: #3a3008; letter-spacing: 0.05em; text-transform: uppercase; font-size: 0.7rem; font-weight: 700; }
+.pre-approval .wrap { max-width: 820px; padding: 0 1.1rem; margin: 0 auto; }
 nav.site {
   border-bottom: 1px solid var(--rule);
   background: var(--parchment);
-  font-size: 0.86rem;
-  letter-spacing: 0.06em;
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 nav.site .wrap {
   display: flex;
-  gap: 1.4rem;
-  padding-top: 0.65rem;
-  padding-bottom: 0.65rem;
+  gap: 1.1rem;
+  padding-top: 0.55rem;
+  padding-bottom: 0.55rem;
   flex-wrap: wrap;
 }
 nav.site a {
@@ -144,35 +153,37 @@ nav.site a:hover, nav.site a.current {
 }
 
 main {
-  padding: 3rem 0 5rem;
+  padding: 1.6rem 0 3rem;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Source Serif 4', Charter, Georgia, serif;
   color: var(--ink);
-  line-height: 1.25;
-  margin-top: 2.2em;
-  margin-bottom: 0.6em;
-  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
 }
-h1 { font-size: 2.4rem; margin-top: 0.3em; letter-spacing: -0.005em; }
-h2 { font-size: 1.6rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.25em; }
-h3 { font-size: 1.22rem; color: var(--accent); }
-h4 { font-size: 1.05rem; letter-spacing: 0.02em; }
+h1 { font-size: 1.85rem; margin-top: 0.2em; }
+h2 { font-size: 1.35rem; border-bottom: 1px solid var(--rule); padding-bottom: 0.2em; margin-top: 1.8em; }
+h3 { font-size: 1.1rem; color: var(--accent); margin-top: 1.4em; }
+h4 { font-size: 1rem; letter-spacing: 0; }
 
-p, li { font-size: 1.05rem; }
-p { margin: 1em 0; }
-ul, ol { padding-left: 1.6rem; }
-li { margin: 0.35em 0; }
+p, li { font-size: 1rem; }
+p { margin: 0.75em 0; }
+ul, ol { padding-left: 1.4rem; margin: 0.6em 0; }
+li { margin: 0.2em 0; }
 
 blockquote {
   border-left: 3px solid var(--accent);
-  margin: 1.5em 0;
-  padding: 0.2em 1.2em;
-  color: var(--ink-soft);
-  font-style: italic;
-  background: rgba(122, 40, 40, 0.03);
+  margin: 1em 0;
+  padding: 0.4em 1em;
+  color: var(--ink);
+  background: rgba(122, 40, 40, 0.04);
+  font-size: 0.98rem;
 }
+blockquote p { margin: 0.4em 0; }
 
 em {
   font-style: italic;
@@ -216,24 +227,28 @@ pre code {
   color: var(--ink);
 }
 
+.table-wrap { overflow-x: auto; margin: 1em -0.5rem; padding: 0 0.5rem; }
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 1.5em 0;
-  font-size: 0.96rem;
+  margin: 1em 0;
+  font-size: 0.9rem;
+  font-family: 'Inter', -apple-system, sans-serif;
 }
 th, td {
   border-bottom: 1px solid var(--rule);
   text-align: left;
-  padding: 0.55em 0.75em;
+  padding: 0.5em 0.6em;
   vertical-align: top;
+  line-height: 1.4;
 }
 th {
   background: var(--parchment-warm);
   font-weight: 600;
-  font-family: 'Cormorant Garamond', Georgia, serif;
   color: var(--ink);
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
+  font-size: 0.85rem;
+  text-transform: uppercase;
 }
 tbody tr:hover { background: rgba(122, 40, 40, 0.02); }
 
@@ -249,55 +264,65 @@ footer.site a { color: var(--ink-soft); border-bottom-color: rgba(74, 70, 66, 0.
 
 /* Home page */
 .hero {
-  padding: 3rem 0 2rem;
-  text-align: center;
+  padding: 1.2rem 0 1.4rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 1.8rem;
 }
 .hero .rule {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.55rem;
+  font-family: 'Source Serif 4', Charter, Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 600;
   font-style: italic;
   color: var(--accent);
-  margin: 1.4rem 0 2.2rem;
-  letter-spacing: 0.03em;
+  margin: 0.9rem 0 0.4rem;
+  letter-spacing: 0;
 }
 .hero h1 {
-  font-size: 2.7rem;
-  margin: 0 0 0.4rem;
+  font-size: 2rem;
+  margin: 0 0 0.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 .hero .sub {
-  font-size: 1.05rem;
+  font-size: 1rem;
   color: var(--ink-soft);
-  font-style: italic;
+  font-style: normal;
+  margin: 0;
+  line-height: 1.5;
 }
 
 .lanes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.2rem;
-  margin: 3rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem;
+  margin: 1.5rem 0 2rem;
 }
 .lane {
   border: 1px solid var(--rule);
-  padding: 1.2rem 1.3rem 1.4rem;
+  padding: 0.8rem 0.95rem 0.95rem;
   background: var(--parchment-warm);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 .lane .num {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 2.2rem;
+  font-family: 'Source Serif 4', Charter, Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--accent);
   line-height: 1;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
 }
 .lane h3 {
-  margin: 0 0 0.4rem;
-  font-size: 1.15rem;
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
   color: var(--ink);
+  font-weight: 600;
 }
 .lane p {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   margin: 0;
-  color: var(--ink-soft);
+  color: var(--ink);
+  line-height: 1.45;
 }
 
 .docs-list {
@@ -306,44 +331,59 @@ footer.site a { color: var(--ink-soft); border-bottom-color: rgba(74, 70, 66, 0.
 .docs-list a.doc-row {
   display: block;
   border-bottom: 1px solid var(--rule);
-  padding: 1rem 0;
+  padding: 0.65rem 0;
   color: var(--ink);
-  border-bottom-color: var(--rule);
   transition: background 0.15s;
 }
 .docs-list a.doc-row:last-child { border-bottom: none; }
 .docs-list a.doc-row:hover {
-  background: rgba(122, 40, 40, 0.03);
-  padding-left: 0.5rem;
+  background: rgba(122, 40, 40, 0.04);
+  padding-left: 0.4rem;
 }
 .docs-list .doc-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.25rem;
+  font-family: 'Source Serif 4', Charter, Georgia, serif;
+  font-size: 1.05rem;
   font-weight: 600;
   display: block;
   color: var(--ink);
 }
 .docs-list .doc-desc {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--ink-soft);
-  font-style: italic;
-  margin-top: 0.15rem;
+  font-style: normal;
+  margin-top: 0.1rem;
+  line-height: 1.4;
 }
 
 .callout {
   border: 1px solid var(--rule);
   background: var(--parchment-warm);
-  padding: 1.3rem 1.6rem;
-  margin: 2rem 0;
-  border-radius: 4px;
+  padding: 0.9rem 1.1rem;
+  margin: 1.4rem 0;
+  border-radius: 3px;
 }
 .callout h3 { margin-top: 0; }
+.callout p:last-child { margin-bottom: 0; }
 
 @media (max-width: 640px) {
-  html { font-size: 16px; }
-  .hero h1 { font-size: 2rem; }
-  h1 { font-size: 1.9rem; }
-  h2 { font-size: 1.4rem; }
+  html { font-size: 15.5px; }
+  .wrap { padding: 0 0.9rem; }
+  .hero { padding: 1rem 0 1.1rem; }
+  .hero h1 { font-size: 1.65rem; }
+  h1 { font-size: 1.55rem; }
+  h2 { font-size: 1.2rem; }
+  h3 { font-size: 1.02rem; }
+  main { padding: 1.2rem 0 2.4rem; }
+  table { font-size: 0.82rem; }
+  th, td { padding: 0.35em 0.45em; }
+  .brand { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+  .brand-title { font-size: 1rem; }
+  .brand-tag { font-size: 0.72rem; }
+  nav.site { font-size: 0.72rem; }
+  nav.site .wrap { gap: 0.75rem 1rem; }
+  .pre-approval { font-size: 0.76rem; }
+  .pre-approval strong { font-size: 0.65rem; }
+  .lanes { grid-template-columns: 1fr; gap: 0.7rem; margin: 1.2rem 0 1.6rem; }
 }
 """
 
@@ -356,7 +396,7 @@ BASE_TEMPLATE = """<!DOCTYPE html>
 <meta name="description" content="The Holy Trinity Caisse — a parish-scale mutual-aid economy under the umbrella of PAIX.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23faf7f0'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia' font-size='22' fill='%237a2828' font-weight='600'%3E%E2%9C%9D%3C/text%3E%3C/svg%3E">
 </head>
@@ -420,6 +460,11 @@ def render_markdown(md_text):
         html = html.replace(f'href="{src_rel}"', f'href="{target}"')
         # Also handle prefixed patterns
         html = html.replace(f'href="../{src_rel}"', f'href="{target}"')
+    # Also rewrite any absolute /docs/... links to relative html routes
+    html = re.sub(r'href="/docs/([^"]+)"', r'href="\1"', html)
+    # Wrap each <table> in a scroll container so mobile can pan wide tables
+    html = re.sub(r'<table>', r'<div class="table-wrap"><table>', html)
+    html = re.sub(r'</table>', r'</table></div>', html)
     return html
 
 
